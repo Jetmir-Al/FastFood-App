@@ -1,0 +1,31 @@
+button {
+    cursor: pointer;
+    font: var(--h5);
+    padding: 0.5rem 1rem;
+}
+
+.navBtn {
+    color: var(--first-color);
+    background-color: transparent;
+    border: none;
+}
+
+
+
+.deleteBtn {
+    background-color: var(--red);
+    border: none;
+    border-radius: 5px;
+    color: var(--white-color);
+}
+
+.deleteBtn:hover {
+    background-color: var(--redHover);
+}
+
+.btn {
+    border: none;
+    border-radius: 5px;
+    color: var(--first-color);
+    background-color: var(--border-color);
+}

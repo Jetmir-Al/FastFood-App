@@ -1,42 +1,84 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/*reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/*Variables */
+:root {
+  --color10: hsl(31, 80%, 10%);
+  --color30: hsl(31, 81%, 30%);
+  --color40: hsl(40, 64%, 57%);
+  --color50: hsl(35, 70%, 75%);
+  --color80: hsl(32, 90%, 85%);
+  --color90: hsl(31, 80%, 90%);
+  --color95: hsl(0, 0%, 98%);
+  --hover95: hsl(0, 0%, 95%);
+  --color100: hsl(31, 80%, 100%);
+  --red: #e60000;
+  --redHover: #c40000;
+  /* --boxShadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  --boxShadow: 0 4px 12px var(--color10);
+  --ff: "Noto Sans JP", serif;
+  --ff2: "Fira Sans", serif;
+  --ff3: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --p: 1rem/1.5rem var(--ff);
+  --h1: 600 3rem/1.2em var(--ff2);
+  --h2: 600 2rem/1.2em var(--ff2);
+  --h3: 500 1.5rem/1.2rem var(--ff);
+  --h4: 450 1.3rem/1.2rem var(--ff);
+  --h5: 400 1.1rem/1.2rem var(--ff);
 }
 
-.card {
-  padding: 2em;
+/* flag shapes */
+/* clip-path: polygon(0% 0%, 100% 0%, 85% 50%, 100% 100%, 0% 100%); */
+
+/* global styles */
+
+html {
+  scroll-behavior: smooth;
 }
 
-.read-the-docs {
-  color: #888;
+body {
+  text-wrap: balance;
+  font: var(--p);
+  background: var(--color90);
+  color: var(--color10);
+}
+
+.icons {
+  color: var(--color10);
+}
+
+h1 {
+  font: var(--h1);
+}
+
+h2 {
+  font: var(--h2);
+}
+
+h3 {
+  font: var(--h3);
+}
+
+h4 {
+  font: var(--h4);
+}
+
+p,
+button,
+legend {
+  font: var(--p);
+}
+
+
+fieldset {
+  border: 2px solid var(--color10);
+}
+
+a {
+  text-decoration: none;
+  color: var(--color10);
 }
