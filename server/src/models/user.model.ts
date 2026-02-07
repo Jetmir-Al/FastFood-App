@@ -1,31 +1,40 @@
-import { db } from "../config/db"
+import { RowDataPacket } from "mysql2";
+import { db } from "../config/db";
+import { IUser } from "../types/User";
 
 
 
 export const UserModel = {
-    async create() {
 
+    async findByEmail(email: string): Promise<IUser | null> {
+        const [rows] = await db.execute<IUser[] & RowDataPacket[]>(
+            `SELECT * FROM users WHERE email = ?`,
+            [email]
+        );
+        return rows[0] ?? null;
     },
 
-    async getDeliveryMen() {
-        const [rowsDeliveryMan] = await db.execute(
+    async getDeliveryMen(): Promise<IUser[] | null> {
+        const [rowsDeliveryMan] = await db.execute<IUser[] & RowDataPacket[]>(
             `
         SELECT * FROM users WHERE role = 'delivery';
         `
         );
-        return rowsDeliveryMan;
+        return rowsDeliveryMan ?? null;
     },
 
     async deleteUser(userID: number) {
-        await db.execute(`
+        const res = await db.execute(`
         DELETE FROM users WHERE userID = ?;
         `, [userID]
         );
+
+        if (res) return "Deleted"
     },
 
     //left to send specific info
-    async allUsers() {
-        const [users] = await db.execute(`
+    async allUsers(): Promise<IUser[] | null> {
+        const [users] = await db.execute<IUser[] & RowDataPacket[]>(`
         SELECT 
         *
         FROM
@@ -33,23 +42,24 @@ export const UserModel = {
         WHERE
         role != '';
         `);
-        return users;
+        return users ?? null;
     },
 
     //update userInfo
 
-    async updatedUserInfo(userID: number, name: string, email: string, passwordHash: string, phone: string, role: string) {
+    async updatedUserInfo(userID: number, name: string, email: string, phone: string, role: string) {
         await db.execute(`
         UPDATE users 
     SET 
 	    name = ?,
         email = ?,
-        passwordHash = ?,
         phone = ?,
         role = ?
     WHERE
         userID = ?
-        `, [name, email, passwordHash, phone, role, userID]);
+        `, [name, email, phone, role, userID]);
+
+        return { message: "updated user!" };
     },
 
     async UpdatePsw(psw: string, userID: number) {
@@ -58,29 +68,18 @@ export const UserModel = {
         `, [psw, userID]);
     },
 
-    async Login(email: string, psw: string, role: string) {
-        const [rowsLogin] = await db.execute(`
+    async Login(email: string, psw: string, role: string): Promise<IUser | null> {
+        const [rowsLogin] = await db.execute<IUser[] & RowDataPacket[]>(`
         SELECT * FROM users WHERE email = ? AND  passwordHash = ? AND role = ?
     `, [email, psw, role]);
-        // return {
-        //     userID: rowsLogin[0].userID,
-        //     name: rowsLogin[0].name,
-        //     email: rowsLogin[0].email,
-        //     phone: rowsLogin[0].phone,
-        //     role: rowsLogin[0].role
-        // };
+        return rowsLogin[0] ?? null;
     },
 
-    async Status(userID: number) {
-        const [rowsLogin] = await db.execute(`
-        SELECT * FROM users WHERE userID = ?
-        `, [userID]);
-        // return {
-        //     name: rowsLogin[0].name,
-        //     email: rowsLogin[0].email,
-        //     phone: rowsLogin[0].phone,
-        //     role: rowsLogin[0].role
-        // };
+    async findByID(userID: number): Promise<IUser | null> {
+        const [user] = await db.execute<IUser[] & RowDataPacket[]>(
+            `SELECT * FROM users WHERE userID = ?`, [userID]
+        );
+        return user[0] ?? null;
     },
 
     async SignUp(name: string, email: string, psw: string, phone: string, role: string) {
@@ -89,9 +88,12 @@ export const UserModel = {
         `, [name, email, psw, phone, role])
     },
 
-    async deleteAccount(email: string, psw: string, role: string) {
+    async deleteAccount(userID: number) {
         await db.execute(`
-        DELETE FROM users WHERE email = ? AND passwordHash = ? AND role = ?; 
-        `, [email, psw, role]);
+        DELETE FROM users WHERE userID = ?;
+        `, [userID]);
+
+        return { message: "deleted acc!" }
+
     },
 }
