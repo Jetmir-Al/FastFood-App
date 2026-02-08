@@ -2,23 +2,16 @@ import { db } from "../config/db";
 
 
 export const DeliveryModal = {
-    async updateDelivery(deliveryID: number, userID: number, address: string, orderID: number, status: string) {
+    async updateDelivery(deliveryID: number, userID: number) {
         await db.execute(`
                 UPDATE delivery SET deliveryManID = ?
-                WHERE delivery.deliveryID = ?;
+                WHERE deliveryID = ?;
             `, [userID, deliveryID]);
-        await db.execute(`
-                UPDATE orders SET orders.status = ?, orders.address = ?
-                WHERE orders.orderID = ?
-            `, [status, address, orderID]);
 
-        if (status == 'delivered') {
-            await db.execute(`
-                    UPDATE delivery SET delivery.delivered = true
-                    WHERE delivery.deliveryID = ?;
-                    `, [deliveryID])
-        }
+        return { message: "Update Successfully!" };
     },
+
+
     async DeliveryHistory(userID: number) {
         const [rowsDeliveryHistory] = await db.execute(`
     SELECT deliveryID,deliveryManID, orders.orderID, customerID, address, 
@@ -72,6 +65,9 @@ export const DeliveryModal = {
         await db.execute(`
             DELETE FROM delivery WHERE deliveryID = ?
             `, [deliveryID]);
+
+        return { message: "Deleted Successfully!" };
+
     },
 
     async activeDelivery(userID: number) {
@@ -89,14 +85,12 @@ export const DeliveryModal = {
         return rowsDeliveryActive;
     },
 
-    async updAsDelivered(deliveryID: number, orderID: number) {
+    async updAsDelivered(deliveryID: number) {
         await db.execute(`
             UPDATE delivery SET delivery.delivered = true
-            WHERE delivery.deliveryID = ?;
+            WHERE deliveryID = ?;
             `, [deliveryID]);
-        await db.execute(`
-            UPDATE orders SET orders.status = 'delivered' 
-            WHERE orders.orderID = ?
-            `, [orderID]);
+
+        return { message: "Updated Successfully!" };
     },
 }

@@ -2,3 +2,9 @@
 export interface IInsertOrder {
     newID: number;
 }
+
+export interface IOrderForm {
+    address: string,
+    foodID: number,
+    quantity: number
+}

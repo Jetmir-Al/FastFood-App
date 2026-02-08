@@ -21,7 +21,7 @@ export const OrderService = {
         return await OrderModel.LiveOrders();
     },
 
-    async deliver(orderID: number, deliveryManID: number) {
+    async deliverOrder(orderID: number, deliveryManID: number) {
         await OrderModel.takeToDeliver(orderID, deliveryManID);
     },
 

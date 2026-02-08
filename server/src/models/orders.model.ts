@@ -20,6 +20,20 @@ export const OrderModel = {
         return rowsDelivery;
     },
 
+    async orderAsDelivered(status: string, address: string, orderID: number) {
+        await db.execute(`
+                UPDATE orders SET orders.status = ?, orders.address = ?
+                WHERE orders.orderID = ?
+            `, [status, address, orderID]);
+    },
+
+    async updByID(orderID: number) {
+        await db.execute(`
+            UPDATE orders SET orders.status = 'delivered' 
+            WHERE orders.orderID = ?
+            `, [orderID]);
+    },
+
     async OrderHisto(customerID: number) {
         const [rowsOrdersHisto] = await db.execute(
             `SELECT DATE_FORMAT(orderDate, '%d/%m/%Y') AS orderDate,DATE_FORMAT(orderDate, '%h:%i %p') AS orderTime, orders.orderID, orderItemID,
