@@ -1,6 +1,8 @@
+import { RowDataPacket } from "mysql2";
 import { db } from "../config/db";
+import { IInsertOrder } from "../types/Order";
 
-export const Orders = {
+export const OrderModel = {
     async top3Orders() {
         const [rowsDelivery] = await db.execute(`
                 SELECT 
@@ -34,7 +36,7 @@ export const Orders = {
 
     //left to fix
     async Order(customerID: number, address: string, foodID: number, quantity: number) {
-        const [insertOrder] = await db.execute(
+        const [insertOrder] = await db.execute<IInsertOrder & RowDataPacket[]>(
             `
     INSERT INTO orders 
     (customerID, address) 
@@ -42,14 +44,14 @@ export const Orders = {
     (?, ?)
         `, [customerID, address]
         );
-        const id = 'insertOrder.insertId'
+        const id = insertOrder.newID;
 
         await db.execute(
             `
-    INSERT INTO order_items 
-    (orderID, foodID, quantity) 
-    VALUES
-    (?, ?, ?)
+                INSERT INTO order_items 
+                (orderID, foodID, quantity) 
+                VALUES
+                (?, ?, ?)
         `, [id, foodID, quantity]
         );
     },

@@ -17,7 +17,7 @@ export const UserService = {
 
     },
 
-    async login(email: string, psw: string, role: string) {
+    async login(email: string, psw: string) {
         const user = await UserModel.findByEmail(email);
 
         if (!user) {
@@ -43,6 +43,20 @@ export const UserService = {
         return await UserModel.getDeliveryMen();
     },
 
+    async status(userID: number) {
+        const userInfo = await UserModel.findByID(userID);
+        if (!userInfo) return null;
+
+        return {
+            userID: userInfo.userID,
+            name: userInfo.name,
+            email: userInfo.email,
+            phone: userInfo.phone,
+            role: userInfo.role,
+        }
+    },
+
+
     async delUser(userID: number) {
         const delUser = await UserModel.deleteUser(userID);
 
@@ -51,7 +65,7 @@ export const UserService = {
         }
     },
 
-    async getUser() {
+    async getUsers() {
         return await UserModel.allUsers();
     },
 

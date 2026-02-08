@@ -19,6 +19,8 @@ export const FoodModel = {
         VALUES  
         (?, ?, ?, ?)
         `, [foodName, foodDesc, price, foodImg]);
+
+        return { message: "added food item!" };
     },
 
 
@@ -26,6 +28,9 @@ export const FoodModel = {
         await db.execute(`
         Update fastfood set foodImg = ? where foodID = ?
         `, [image, foodID]);
+
+        return { message: "updated food image!" };
+
     }
 
 }
