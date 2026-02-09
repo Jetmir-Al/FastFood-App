@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { DeliveryService } from "../services/delivery.service";
 import { HttpError } from "../http/http.error";
-import { IUpdDelivery } from "../types/Delivery";
+import { IDeleteDelivery, IUpdDelivery } from "../types/Delivery";
 import { verifyToken } from "../utils/jwt";
 
 
@@ -59,7 +59,7 @@ export const getAllDelivery = async (req: Request, res: Response) => {
 
 export const deleteDelivery = async (req: Request, res: Response) => {
     try {
-        const { deliveryID }: { deliveryID: number } = req.body;
+        const { deliveryID }: IDeleteDelivery = req.body;
 
         await DeliveryService.delDelivery(deliveryID);
 

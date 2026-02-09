@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { HttpError } from "../http/http.error";
 import { verifyToken } from "../utils/jwt";
 import { OrderService } from "../services/orders.service";
-import { IOrderForm } from "../types/Order";
+import { IOrderForm, ITakeToDeliver } from "../types/Order";
 
 
 export const topOrders = async (req: Request, res: Response) => {
@@ -63,7 +63,7 @@ export const getLiveOrder = async (req: Request, res: Response) => {
 
 export const takeToDeliver = async (req: Request, res: Response) => {
     try {
-        const { orderID }: { orderID: number } = req.body;
+        const { orderID }: ITakeToDeliver = req.body;
         const token = req.cookies.access_token;
         if (!token) {
             return res.status(404).json({ message: "Cookie not found" });
@@ -95,7 +95,7 @@ export const ActiveOrders = async (req: Request, res: Response) => {
 
 export const CancelOrder = async (req: Request, res: Response) => {
     try {
-        const { orderID }: { orderID: number } = req.body;
+        const { orderID }: ITakeToDeliver = req.body;
 
         await OrderService.cancelOrder(orderID);
         res.status(200).json({ message: "Canceled Successfully!" });

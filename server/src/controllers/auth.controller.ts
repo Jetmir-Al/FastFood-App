@@ -1,7 +1,7 @@
 import { UserService } from "../services/user.service";
 import { signToken, verifyToken } from "../utils/jwt";
 import { HttpError } from "../http/http.error";
-import { ILogin, IRegister, IUpdatePsw, IUpdateUser, IUser } from "../types/User";
+import { IDeleteUser, ILogin, IRegister, IUpdatePsw, IUpdateUser, IUser } from "../types/User";
 import { Request, Response } from "express";
 import { cookieConfig } from "../config/httpCookies";
 
@@ -92,7 +92,7 @@ export const logout = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
     try {
-        const { userID }: { userID: number } = req.body;
+        const { userID }: IDeleteUser = req.body;
         await UserService.delUser(userID);
 
         res.status(200).json({ message: "Deleted Succesfully!" });

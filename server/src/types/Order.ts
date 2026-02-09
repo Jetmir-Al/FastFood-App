@@ -8,3 +8,7 @@ export interface IOrderForm {
     foodID: number,
     quantity: number
 }
+
+export interface ITakeToDeliver {
+    orderID: number;
+}

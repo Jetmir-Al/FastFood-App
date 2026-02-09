@@ -33,3 +33,7 @@ export interface IUpdatePsw {
     oldPsw: string,
     newPsw: string
 }
+
+export interface IDeleteUser {
+    userID: number;
+}

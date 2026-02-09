@@ -1,15 +1,17 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth.middleware';
 import { OrderForm, orderHistory, topOrders, ActiveOrders, CancelOrder, getLiveOrder, takeToDeliver } from '../controllers/order.controller';
+import { validateBody } from '../middleware/validate.middleware';
+import { isCancelOrder, isOrderFormBody, isTakeToDeliverBody } from '../validators/order.validator';
 
 const router = express.Router();
 
 router.get("/orderHistory", requireAuth, orderHistory);
 router.get("/topOrders", requireAuth, topOrders);
-router.post("/orderForm", requireAuth, OrderForm);
+router.post("/orderForm", requireAuth, validateBody(isOrderFormBody), OrderForm);
 router.get("/activeOrders", requireAuth, ActiveOrders);
-router.post("/cancelOrder", requireAuth, CancelOrder);
+router.post("/cancelOrder", requireAuth, validateBody(isCancelOrder), CancelOrder);
 router.get("/getLiveOrders", requireAuth, getLiveOrder);
-router.post("/takeToDeliver", requireAuth, takeToDeliver);
+router.post("/takeToDeliver", requireAuth, validateBody(isTakeToDeliverBody), takeToDeliver);
 
 export default router;

@@ -6,3 +6,7 @@ export interface IUpdDelivery {
     orderID: number,
     status: string
 }
+
+export interface IDeleteDelivery {
+    deliveryID: number;
+}
