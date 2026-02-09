@@ -7,21 +7,22 @@
 
 /*Variables */
 :root {
-  --color10: hsl(31, 80%, 10%);
-  --color30: hsl(31, 81%, 30%);
-  --color40: hsl(40, 64%, 57%);
-  --color50: hsl(35, 70%, 75%);
-  --color80: hsl(32, 90%, 85%);
-  --color90: hsl(31, 80%, 90%);
-  --color95: hsl(0, 0%, 98%);
-  --hover95: hsl(0, 0%, 95%);
-  --color100: hsl(31, 80%, 100%);
+  --first-color: hsl(31, 81%, 30%);
+  --first-color-hover: hsl(31, 81%, 26%);
+  --title-color: hsl(31, 80%, 12%);
+  --text-color: hsl(28, 18%, 38%);
+  --border-color: hsl(32, 60%, 88%);
+  --white-color: hsl(0, 0%, 100%);
+  --body-color: hsl(35, 70%, 96%);
+  --container-color: hsl(35, 70%, 92%);
+  --focus-ring: 0 0 0 3px hsla(31, 81%, 30%, .25);
+  --accent-color: hsl(40, 90%, 55%);
   --red: #e60000;
   --redHover: #c40000;
   /* --boxShadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-  --boxShadow: 0 4px 12px var(--color10);
-  --ff: "Noto Sans JP", serif;
-  --ff2: "Fira Sans", serif;
+  --boxShadow: 0 4px 12px rgba(0, 0, 0, .12);
+  --ff: "Noto Sans JP", sans-serif;
+  --ff2: "Fira Sans", sans-serif;
   --ff3: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   --p: 1rem/1.5rem var(--ff);
   --h1: 600 3rem/1.2em var(--ff2);
@@ -42,14 +43,24 @@ html {
 
 body {
   text-wrap: balance;
+  overflow-wrap: break-word;
   font: var(--p);
-  background: var(--color90);
-  color: var(--color10);
+  background: var(--body-color);
+  color: var(--text-color);
 }
 
 .icons {
-  color: var(--color10);
+  color: var(--title-color);
 }
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--title-color);
+}
+
 
 h1 {
   font: var(--h1);
@@ -73,12 +84,13 @@ legend {
   font: var(--p);
 }
 
-
-fieldset {
-  border: 2px solid var(--color10);
+img {
+  max-width: 100%;
+  display: block;
 }
+
 
 a {
   text-decoration: none;
-  color: var(--color10);
+  color: var(--text-color);
 }

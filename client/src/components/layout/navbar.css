@@ -4,7 +4,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--color30);
+    background-color: var(--first-color);
+    color: var(--title-color);
     height: 10vh;
     padding: 10px;
 }
@@ -28,14 +29,14 @@ button {
     font: var(--p);
     border-radius: 5px;
     padding: 0.5rem 1.2rem;
-    background-color: var(--color100);
-    color: var(--color30);
+    background-color: var(--white-color);
+    color: var(--text-color);
     font-weight: 600;
     transition: background-color 0.3s;
 }
 
 .accountBtn:hover {
-    background-color: var(--color90);
+    background-color: var(--border-color);
 }
 
 
@@ -49,6 +50,11 @@ button {
 .navbar-left li {
     margin: 10px;
 }
+
+.navbar-left li a {
+    color: var(--title-color);
+}
+
 
 @media screen and (max-width: 758px) {
     .accountBtn {

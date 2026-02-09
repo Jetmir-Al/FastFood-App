@@ -9,8 +9,8 @@
 }
 
 .notFound-btn {
-    background: var(--color30);
-    border: 3px solid var(--color30);
-    color: var(--color100);
+    background: var(--first-color);
+    border: 3px solid var(--first-color);
+    color: var(--white-color);
     border-radius: 3px;
 }

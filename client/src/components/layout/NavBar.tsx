@@ -19,6 +19,9 @@ const NavBar = () => {
                 <li>
                     <Link to="/foodList">Menu</Link>
                 </li>
+                <li>
+                    <Link to="/about">About</Link>
+                </li>
                 {roleBasedNav}
             </ul>
             <div className='navbar-right'>
