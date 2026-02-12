@@ -3,6 +3,7 @@ dotenv.config();
 import cors from "cors";
 import express from "express";
 import cookieParser from "cookie-parser";
+import path from "path";
 
 import AuthRoutes from "./routes/auth.routes";
 import DeliveryRoutes from "./routes/delivery.routes";
@@ -18,6 +19,11 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+    "/images",
+    express.static(path.join(__dirname, "public/images"))
+);
+
 
 if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is not defined");

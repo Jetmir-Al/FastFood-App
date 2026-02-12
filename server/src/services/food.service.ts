@@ -7,7 +7,11 @@ export const FoodService = {
         return await FoodModel.foodList();
     },
 
-    async addNewFood(foodName: string, foodDesc: string, price: number, foodImg: string) {
+    async getTopFood() {
+        return await FoodModel.topFoods();
+    },
+
+    async addNewFood(foodName: string, foodDesc: string, price: number, foodImg: string | undefined) {
         const res = await FoodModel.addFoodItem(foodName, foodDesc, price, foodImg);
         if (res.message !== "added food item!") {
             throw new Error("Problem with inserting");

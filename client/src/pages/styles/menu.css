@@ -35,16 +35,21 @@
     gap: 10px;
     padding: 10px;
     border-radius: 10px;
-    background-color: var(--color40);
+    background-color: var(--first-color);
     box-shadow: var(--boxShadow);
+    color: var(--white-color);
 }
 
 .food img {
     width: 150px;
     height: 130px;
-    background-color: var(--color90);
+    background-color: var(--container-color);
     border-radius: 10px;
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.food h4 {
+    color: var(--white-color);
 }
 
 .addFoodItem {
@@ -57,7 +62,7 @@
     width: 40%;
     border-radius: 0 0 15px 15px;
     box-shadow: var(--boxShadow);
-    background-color: var(--color80);
+    background-color: var(--first-color);
 }
 
 .foodItemHeader {
@@ -66,24 +71,24 @@
     align-items: center;
     width: 40%;
     padding: 1.5rem 2rem;
-    background-color: var(--color30);
-    color: var(--color100);
+    background-color: var(--title-color);
+    color: var(--white-color);
     box-shadow: var(--boxShadow);
     border-radius: 12px 12px 0 0;
 }
 
 .addBtn {
     padding: 0.3rem 1.5rem;
-    background-color: var(--color100);
+    background-color: var(--white-color);
     color: var(--color30);
     border-radius: 20px;
-    border: 2px solid var(--color30);
+    border: 2px solid var(--border-color);
     transition: 1s;
 }
 
 .addBtn:hover {
-    background-color: var(--color30);
-    color: var(--color100);
+    background-color: var(--first-color-hover);
+    color: var(--white-color);
 }
 
 .addFoodItem h2 {
@@ -96,16 +101,16 @@
     width: 100%;
     font: var(--p);
     border: none;
-    border-bottom: 3px dashed var(--color10);
+    border-bottom: 3px dashed var(--border-color);
     outline: none;
 }
 
 .addFoodItem input:focus {
-    border-bottom: 3px solid var(--color10);
+    border-bottom: 3px solid var(--border-color);
 }
 
 .addFoodItem :nth-child(4) {
-    border-bottom: 3px solid var(--color10);
+    border-bottom: 3px solid var(--border-color);
 
 }
 

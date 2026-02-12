@@ -14,9 +14,29 @@ export const getFoodItems = async (req: Request, res: Response) => {
     }
 };
 
+export const getTopFoods = async (req: Request, res: Response) => {
+    try {
+        const foodItems = await FoodService.getTopFood();
+        res.status(200).json(foodItems);
+
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const UploadImgToDB = async (req: Request, res: Response) => {
+    const image = req.file?.filename;
+    try {
+        console.log("Img upload happened well!")
+    } catch (err) {
+        console.log("Diqka shkoi keq:", err)
+    }
+}
+
 export const addNewFoodItem = async (req: Request, res: Response) => {
     try {
-        const { foodName, foodDesc, price, foodImg }: IFoodInsert = req.body;
+        const foodImg = req.file?.filename;
+        const { foodName, foodDesc, price }: IFoodInsert = req.body;
 
         await FoodService.addNewFood(foodName, foodDesc, price, foodImg);
 
