@@ -3,6 +3,7 @@ import './App.css';
 import NavBar from './components/layout/NavBar';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
+import Menu from './pages/Menu';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='*' element={<NotFound />} />
         <Route path='/about' element={<About />} />
+        <Route path='/menu' element={<Menu />} />
       </Routes>
     </Router>
   )

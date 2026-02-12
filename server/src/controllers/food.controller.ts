@@ -6,7 +6,7 @@ import { IFoodInsert, IFoodUpdate } from "../types/Food";
 
 export const getFoodItems = async (req: Request, res: Response) => {
     try {
-        const foodItems = FoodService.getMenu();
+        const foodItems = await FoodService.getMenu();
         res.status(200).json(foodItems);
 
     } catch (error: any) {
