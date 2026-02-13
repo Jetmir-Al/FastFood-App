@@ -5,6 +5,8 @@ import NotFound from './pages/NotFound';
 import About from './pages/About';
 import Menu from './pages/Menu';
 import Home from './pages/Home';
+import { LogIn } from './components/forms/Login';
+import { SignUp } from './components/forms/SignUp';
 
 function App() {
 
@@ -13,9 +15,12 @@ function App() {
       <NavBar />
       <Routes>
         <Route path='*' element={<NotFound />} />
-        <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/menu' element={<Menu />} />
+
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<LogIn />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </Router>
   )

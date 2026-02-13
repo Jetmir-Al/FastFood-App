@@ -1,11 +1,13 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons";
+import Button from "../ui/Button";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
     const roleBasedNav = "ll";
-    const accountLinks = "ll";
+    const navigate = useNavigate();
 
     return (
         <div className='navbar-container'>
@@ -25,7 +27,14 @@ const NavBar = () => {
                 {roleBasedNav}
             </ul>
             <div className='navbar-right'>
-                {accountLinks}
+                {
+                    <Button
+                        className=""
+                        type="button"
+                        onClick={() => { navigate("/signup") }} >
+                        <FontAwesomeIcon icon={faUser} />
+                    </Button>
+                }
             </div>
         </div>
     );

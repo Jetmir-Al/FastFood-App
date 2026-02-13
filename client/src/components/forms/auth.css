@@ -1,0 +1,172 @@
+.login-Container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+    height: 80%;
+    gap: 1rem;
+    border-radius: 20px;
+    background-color: var(--container-color);
+    box-shadow: var(--boxShadow);
+
+}
+
+.loginForm label,
+.role {
+    width: 60%;
+    font: var(--h4);
+}
+
+.loginForm input,
+.role {
+    padding: 0.7rem 1rem;
+    font: var(--p);
+    border: none;
+    border-bottom: 3px dashed var(--first-color);
+    outline: none;
+}
+
+.loginForm input {
+    width: 100%;
+}
+
+.displayBadinfo {
+    display: none;
+    font: var(--p);
+}
+
+#diqka {
+    color: red;
+}
+
+.loginForm input:focus,
+.role:focus {
+    border-bottom: 3px solid var(--first-color);
+}
+
+.btn-continer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.btn-login {
+    padding: 0.6rem 2rem;
+    font: var(--p);
+    border: none;
+    color: var(--white-color);
+    border-radius: 50px;
+    background-color: var(--first-color);
+    transition: 0.5s;
+}
+
+.btn-login:hover {
+    background-color: var(--first-color-hover);
+    color: var(--white-color);
+}
+
+.signUp-Container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding-top: 2rem;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+    gap: 1.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: var(--container-color);
+    box-shadow: var(--boxShadow);
+
+}
+
+.signupForm label {
+    font: var(--h4);
+    width: 60%;
+}
+
+.signUpInput {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    font: var(--p);
+    border: none;
+    border-bottom: 3px dashed var(--first-color);
+    outline: none;
+}
+
+.displayBadInfo {
+    display: none;
+}
+
+#keq {
+    color: red;
+}
+
+.signUpInput:focus {
+    border-bottom: 3px solid var(--first-color);
+}
+
+.signupForm p,
+.loginForm p {
+    align-self: center;
+}
+
+.formToggle {
+    color: var(--text-color);
+}
+
+@media screen and (max-width: 1024px) {
+    .signupForm {
+        width: 70%;
+    }
+
+    .signupForm label {
+        width: 75%;
+    }
+
+    .loginForm {
+        width: 70%;
+    }
+
+    .loginForm label,
+    .role {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .signupForm {
+        width: 90%;
+    }
+
+    .signupForm label {
+        width: 85%;
+    }
+
+    .loginForm,
+    .role {
+        width: 90%;
+    }
+
+    .loginForm label,
+    .role {
+        width: 85%;
+    }
+}
