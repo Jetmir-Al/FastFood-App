@@ -1,8 +1,10 @@
 import './auth.css';
 import { useNavigate } from 'react-router';
-import { useState, type ReactHTMLElement } from 'react';
+import { useState } from 'react';
 import Button from '../ui/Button';
 import { register } from '../../api/auth.api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHamburger } from '@fortawesome/free-solid-svg-icons';
 
 export const SignUp = () => {
 
@@ -24,7 +26,7 @@ export const SignUp = () => {
             await register(name, email, psw, phone, role);
             // 
             navigate("/logIn");
-        } catch (err: any | string) {
+        } catch {
             // 
         }
     }
@@ -32,7 +34,9 @@ export const SignUp = () => {
     return (
         <div className='signUp-Container'>
             <form className='signupForm' onSubmit={signUp}>
-                <h1>Singup</h1>
+                <h2 className='authTitle'>
+                    Singup <FontAwesomeIcon icon={faHamburger} />
+                </h2>
                 {
                     badInfo && <p id='' className='displayBadInfo'>Invalid Credecials!</p>
                 }

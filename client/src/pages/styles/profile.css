@@ -1,0 +1,169 @@
+.customer-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.custmoreInfo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    gap: 5px;
+    height: 65vh;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+    background-color: var(--white-color);
+    box-shadow: var(--boxShadow-strong);
+    border: 2px solid var(--border-color);
+}
+
+.custmoreInfo-container button {
+    align-self: flex-end;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--title-color);
+    background-color: var(--white-color);
+    border-radius: 3px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    gap: 5px;
+    height: 65vh;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+    background-color: var(--white-color);
+    box-shadow: var(--boxShadow);
+}
+
+.updatePswBtn {
+    align-self: flex-end;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--title-color);
+    background-color: var(--white-color);
+    border-radius: 3px;
+}
+
+
+.accInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+}
+
+
+.accInfo-extra {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--title-color);
+    padding: 1rem;
+    gap: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.updatePsw {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.inputPsw {
+    padding: 10px;
+    width: 100%;
+    font: var(--p);
+    border: none;
+    border-bottom: 3px dashed var(--first-color);
+    outline: none;
+}
+
+.inputPsw:focus {
+    border-bottom: 3px solid var(--first-color-hover);
+}
+
+.accinfo-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.accountManagment {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.accountManagment button,
+.accinfo-btns button {
+    padding: 0.7rem 1rem;
+    border: none;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    transition: 0.5s;
+}
+
+.accountManagment button:hover,
+.accinfo-btns button:hover {
+    background-color: var(--first-color-hover);
+}
+
+.accountManagment :last-child,
+.accinfo-btns :last-child {
+    background-color: var(--red);
+    color: var(--white-color);
+}
+
+.accountManagment :last-child:hover,
+.accinfo-btns :last-child:hover {
+    background-color: var(--redHover);
+}
+
+
+@media screen and (max-width: 1024px) {
+    .info-container {
+        width: 65%;
+    }
+
+    .accInfo {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .info-container {
+        width: 80%;
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+    .custmoreInfo-container {
+        width: 65%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .custmoreInfo-container {
+        width: 85%;
+    }
+}

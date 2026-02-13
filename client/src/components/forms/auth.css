@@ -1,62 +1,8 @@
-.login-Container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-}
-
-.loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 40%;
-    height: 80%;
-    gap: 1rem;
-    border-radius: 20px;
-    background-color: var(--container-color);
-    box-shadow: var(--boxShadow);
-
-}
-
-.loginForm label,
-.role {
-    width: 60%;
-    font: var(--h4);
-}
-
-.loginForm input,
-.role {
-    padding: 0.7rem 1rem;
-    font: var(--p);
-    border: none;
-    border-bottom: 3px dashed var(--first-color);
-    outline: none;
-}
-
-.loginForm input {
-    width: 100%;
-}
-
-.displayBadinfo {
-    display: none;
-    font: var(--p);
-}
-
-#diqka {
-    color: red;
-}
-
-.loginForm input:focus,
-.role:focus {
-    border-bottom: 3px solid var(--first-color);
-}
-
 .btn-continer {
     display: flex;
-    flex-direction: row;
     gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
 }
 
 .btn-login {
@@ -74,53 +20,72 @@
     color: var(--white-color);
 }
 
-.signUp-Container {
+.signUp-Container,
+.login-Container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
-    padding-top: 2rem;
 }
 
-.signupForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 40%;
-    gap: 1.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    background-color: var(--container-color);
-    box-shadow: var(--boxShadow);
-
+.signupForm,
+.loginForm {
+    text-align: center;
+    width: 420px;
+    max-width: 95%;
+    margin: 4rem auto;
+    padding: 2.5rem 2.5rem 2rem;
+    background: var(--white-color);
+    border-radius: 18px;
+    box-shadow: var(--boxShadow-strong);
+    border: 2px solid var(--border-color);
+    position: relative;
 }
 
-.signupForm label {
+.authTitle {
+    position: absolute;
+    top: -20px;
+    right: 32%;
+    padding: 0.2rem 1rem;
+    text-align: center;
+    color: var(--white-color);
+    border-radius: 10px;
+    background-color: var(--first-color);
+}
+
+.signupForm label,
+.loginForm label {
     font: var(--h4);
-    width: 60%;
-}
-
-.signUpInput {
-    padding: 0.5rem 1rem;
+    margin-bottom: .4rem;
+    display: block;
+    text-align: left;
     width: 100%;
-    font: var(--p);
-    border: none;
-    border-bottom: 3px dashed var(--first-color);
-    outline: none;
 }
 
-.displayBadInfo {
-    display: none;
+.signUpInput,
+.loginInput,
+.role {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--container-color);
+    transition: .2s;
 }
+
 
 #keq {
     color: red;
 }
 
-.signUpInput:focus {
-    border-bottom: 3px solid var(--first-color);
+.signUpInput:focus,
+.role:focus,
+.loginInput:focus {
+    outline: none;
+    border-color: var(--first-color);
+    background: var(--white-color);
+    box-shadow: var(--boxShadow);
 }
 
 .signupForm p,
@@ -129,6 +94,7 @@
 }
 
 .formToggle {
+    font: var(--h4);
     color: var(--text-color);
 }
 
@@ -137,18 +103,10 @@
         width: 70%;
     }
 
-    .signupForm label {
-        width: 75%;
-    }
-
     .loginForm {
         width: 70%;
     }
 
-    .loginForm label,
-    .role {
-        width: 75%;
-    }
 }
 
 @media screen and (max-width: 600px) {
@@ -156,17 +114,8 @@
         width: 90%;
     }
 
-    .signupForm label {
-        width: 85%;
-    }
 
-    .loginForm,
-    .role {
+    .loginForm {
         width: 90%;
-    }
-
-    .loginForm label,
-    .role {
-        width: 85%;
     }
 }
