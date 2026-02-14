@@ -6,31 +6,38 @@ import { useState } from 'react';
 import Button from '../ui/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+import { useAuthHook } from '../../hooks/useAuthHook';
+import { login } from '../../api/auth.api';
 
 
 export const LogIn = () => {
 
     const navigate = useNavigate();
-
+    const { setUser, setAuth } = useAuthHook();
 
     const [email, setEmail] = useState('');
     const [psw, setPsw] = useState('');
 
     const [badInfo, setBadInfo] = useState<boolean>(false);
     // const BadInfo = () => setBadInfo(true);
-    const login = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    const loginForm = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            // 
-        } catch (error: any) {
-            // 
-            console.log(error);
+            // testing
+            const res = await login(email, psw);
+            if (res.message === "User loged in!") {
+                setAuth(true);
+                setUser(res.user);
+                navigate("/profile");
+            }
+        } catch {
+            setBadInfo(true);
         }
     }
 
     return (
         <div className='login-Container'>
-            <form className='loginForm' onSubmit={login}>
+            <form className='loginForm' onSubmit={loginForm}>
                 <h2 className='authTitle'>
                     Login <FontAwesomeIcon icon={faPizzaSlice} />
                 </h2>
@@ -45,9 +52,7 @@ export const LogIn = () => {
                 </label>
                 <label>
                     Password: <br />
-
                     <input type="password" className='loginInput' placeholder='Password' required
-                        minLength={6}
                         onChange={(e) => setPsw(e.target.value)} />
                 </label>
 

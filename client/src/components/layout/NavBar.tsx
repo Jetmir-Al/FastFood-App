@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHamburger } from "@fortawesome/free-solid-svg-icons";
+import { faHamburger, faUserGear } from "@fortawesome/free-solid-svg-icons";
 import Button from "../ui/Button";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useAuthHook } from "../../hooks/useAuthHook";
 
 const NavBar = () => {
-    const roleBasedNav = "ll";
+    const { user, authenticated } = useAuthHook();
     const navigate = useNavigate();
 
     return (
@@ -24,16 +25,35 @@ const NavBar = () => {
                 <li>
                     <Link to="/about">About</Link>
                 </li>
-                {roleBasedNav}
+                {
+                    user?.role === "customer" &&
+                    <li>
+                        <Link to="/order">Order</Link>
+                    </li>
+                }
+                {
+                    user?.role === "delivery" &&
+                    <li>
+                        <Link to="/orders">About</Link>
+                    </li>
+                }
             </ul>
             <div className='navbar-right'>
                 {
-                    <Button
-                        className=""
-                        type="button"
-                        onClick={() => { navigate("/signup") }} >
-                        <FontAwesomeIcon icon={faUser} />
-                    </Button>
+                    authenticated ?
+                        <Button
+                            className=""
+                            type="button"
+                            onClick={() => { navigate("/profile") }} >
+                            <FontAwesomeIcon icon={faUserGear} />
+                        </Button>
+                        :
+                        <Button
+                            className=""
+                            type="button"
+                            onClick={() => { navigate("/signup") }} >
+                            <FontAwesomeIcon icon={faUser} />
+                        </Button>
                 }
             </div>
         </div>

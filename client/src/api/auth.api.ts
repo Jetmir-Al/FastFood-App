@@ -8,11 +8,11 @@ export const login = async (email: string, password: string) => {
     return res.data;
 };
 
-export const register = async (name: string, email: string, password: string, phone: string, role: string) => {
+export const register = async (name: string, email: string, passwordHash: string, phone: string, role: string) => {
     const res = await api.post("/auth/signup", {
         name,
         email,
-        password,
+        passwordHash,
         phone,
         role
     });

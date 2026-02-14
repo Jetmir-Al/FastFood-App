@@ -9,16 +9,13 @@ import { LogIn } from './components/forms/Login';
 import { SignUp } from './components/forms/SignUp';
 import { useAuthHook } from './hooks/useAuthHook';
 import Profile from './pages/Profile';
+import Order from './components/forms/Order';
 
 function App() {
   const { authenticated, user } = useAuthHook();
   return (
     <Router>
       <NavBar />
-      {
-        authenticated &&
-        <div>{user?.name} loged in</div>
-      }
       <Routes>
         <Route path='*' element={<NotFound />} />
         <Route path='/about' element={<About />} />
@@ -29,6 +26,8 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
 
         <Route path='/profile' element={<Profile />} />
+
+        <Route path='/order' element={<Order />} />
       </Routes>
     </Router>
   )

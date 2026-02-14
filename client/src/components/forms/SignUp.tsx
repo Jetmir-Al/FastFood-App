@@ -10,24 +10,25 @@ export const SignUp = () => {
 
     const navigate = useNavigate();
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [psw, setPsw] = useState('');
-    const [phone, setPhone] = useState('');
-    const [role, setRole] = useState('');
+    const [name, setName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [psw, setPsw] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [role, setRole] = useState<string>('');
 
-    const [badInfo, setBadInfo] = useState(false);
-    const BadInfo = () => setBadInfo(true);
+    const [badInfo, setBadInfo] = useState<boolean>(false);
 
 
     const signUp = async (event: React.SubmitEvent<HTMLFormElement>) => {
+        console.log(name, email, psw, phone, role)
         event.preventDefault();
         try {
-            await register(name, email, psw, phone, role);
-            // 
-            navigate("/logIn");
+            const res = await register(name, email, psw, phone, role);
+            if (res.message === "User Created") {
+                navigate("/login");
+            }
         } catch {
-            // 
+            setBadInfo(true);
         }
     }
 
@@ -38,7 +39,7 @@ export const SignUp = () => {
                     Singup <FontAwesomeIcon icon={faHamburger} />
                 </h2>
                 {
-                    badInfo && <p id='' className='displayBadInfo'>Invalid Credecials!</p>
+                    badInfo && <p className='displayBadInfo'>Invalid Credecials!</p>
                 }
                 <label>
                     Name: <br />
@@ -53,11 +54,13 @@ export const SignUp = () => {
                 <label>
                     Password: <br />
                     <input className='signUpInput' type="password" placeholder='Password' required
+                        minLength={6}
                         onChange={(e) => setPsw(e.target.value)} />
                 </label>
                 <label>
                     Phone Number: <br />
-                    <input className='signUpInput' type="number" placeholder='Phone number' required onChange={(e) => setPhone(e.target.value)} />
+                    <input className='signUpInput' type="number"
+                        maxLength={20} placeholder='Phone number' required onChange={(e) => setPhone(e.target.value)} />
                 </label>
                 <select id="role" className='role' name="role" required value={role}
                     onChange={(e) => setRole(e.target.value)}>

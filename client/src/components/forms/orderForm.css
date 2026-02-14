@@ -1,0 +1,72 @@
+.order-container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order {
+    width: 420px;
+    max-width: 95%;
+    margin: 4rem auto;
+    padding: 2.5rem 2.5rem 2rem;
+    background: var(--white-color);
+    border-radius: 18px;
+    box-shadow: var(--boxShadow-strong);
+    border: 2px solid var(--border-color);
+    position: relative;
+}
+
+
+
+.order input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--container-color);
+    transition: .2s;
+}
+
+.orderItem {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--container-color);
+    transition: .2s;
+}
+
+
+
+
+.orderLbl {
+    font: var(--h4);
+    margin-bottom: .4rem;
+    display: block;
+    text-align: left;
+    width: 100%;
+}
+
+.submitOrder {
+    color: green;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .order,
+    .orderHeader {
+        width: 80%;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+
+    .order,
+    .orderHeader {
+        width: 90%;
+    }
+}
