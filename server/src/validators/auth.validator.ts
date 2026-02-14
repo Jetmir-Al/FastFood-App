@@ -4,6 +4,8 @@ import { IDeleteUser, ILogin, IRegister, IUpdatePsw, IUpdateUser } from "../type
 export const isSignUpBody = (body: any): body is IRegister => {
     return (
         typeof body === "object" &&
+        typeof body.name === "string" &&
+        body.name !== "" &&
         typeof body.email === "string" &&
         body.email.includes("@") &&
         body.email !== "" &&

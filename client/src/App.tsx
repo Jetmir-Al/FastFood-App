@@ -10,24 +10,39 @@ import { SignUp } from './components/forms/SignUp';
 import { useAuthHook } from './hooks/useAuthHook';
 import Profile from './pages/Profile';
 import Order from './components/forms/Order';
+import ProtectedRoutes from './routes/ProtectedRoutes';
+import Delivery from './components/delivery/Delivery';
 
 function App() {
-  const { authenticated, user } = useAuthHook();
+  const { user } = useAuthHook();
   return (
     <Router>
       <NavBar />
       <Routes>
+
         <Route path='*' element={<NotFound />} />
         <Route path='/about' element={<About />} />
         <Route path='/menu' element={<Menu />} />
 
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<LogIn />} />
-        <Route path='/signup' element={<SignUp />} />
+        <Route element={<ProtectedRoutes isAllowed={user === null} />}>
 
-        <Route path='/profile' element={<Profile />} />
+          <Route path='/login' element={<LogIn />} />
+          <Route path='/signup' element={<SignUp />} />
+        </Route>
+        <Route element={<ProtectedRoutes isAllowed={!!user} />}>
+          <Route path='/profile' element={<Profile />} />
+        </Route>
 
-        <Route path='/order' element={<Order />} />
+        <Route element={<ProtectedRoutes isAllowed={!!user && user?.role === "customer"} />}>
+          <Route path='/order' element={<Order />} />
+        </Route>
+
+        <Route element={<ProtectedRoutes isAllowed={!!user && user?.role === "delivery"} />}>
+          <Route path='/delivery' element={<Delivery />} />
+        </Route>
+
+
       </Routes>
     </Router>
   )

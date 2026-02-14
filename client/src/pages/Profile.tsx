@@ -6,12 +6,15 @@ import { useState } from 'react';
 import { useAuthHook } from '../hooks/useAuthHook';
 import "./styles/profile.css";
 import { logout } from '../api/auth.api';
+import Error from '../utils/Error';
+import Card from '../components/ui/Card';
 
 const Profile = () => {
 
     const [updatePsw, setUpdatePsw] = useState<boolean>(false);
     const [newPsw, setNewPsw] = useState<string>("");
     const [oldPsw, setOldPsw] = useState<string>("");
+    const [err, setErr] = useState<boolean>(false);
     const navigate = useNavigate();
     const { user, setUser, setAuth } = useAuthHook();
 
@@ -22,8 +25,15 @@ const Profile = () => {
             setUser(null);
             navigate("/");
         } catch {
-            // 
+            setErr(true);
         }
+    }
+
+    if (err) {
+        return <Error
+            title='Error login out!'
+            details={"Try again later"}
+            onRetry={async () => { await logoutFunc() }} />
     }
 
     return (
@@ -79,8 +89,10 @@ const Profile = () => {
                             Delete Account
                         </Button>
                     </div>
+
                 </div>
             </div>
+            <Card quantity={2} foodDesc='sss' foodImg='ss' foodName='ss' fullPrice={12} orderTime={new Date} orderDate={new Date} address='sdfnsn' status='yes' />
         </div>
     )
 }

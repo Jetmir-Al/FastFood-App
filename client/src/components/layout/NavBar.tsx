@@ -34,7 +34,7 @@ const NavBar = () => {
                 {
                     user?.role === "delivery" &&
                     <li>
-                        <Link to="/orders">About</Link>
+                        <Link to="/delivery">Delivery</Link>
                     </li>
                 }
             </ul>

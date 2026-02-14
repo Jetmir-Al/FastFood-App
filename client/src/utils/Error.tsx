@@ -7,7 +7,7 @@ import Button from '../components/ui/Button';
 interface IError {
     title: string,
     details: string | null | undefined | object,
-    onRetry: () => void | null,
+    onRetry: () => void,
 }
 
 export default function Error({ title, details, onRetry }: IError) {

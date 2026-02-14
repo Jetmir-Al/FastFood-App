@@ -1,15 +1,19 @@
 import "./styles/home.css";
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import type { IMenu } from "../types/foodTypes";
 import { getImageUrl, getTopFoods } from "../api/food.api";
 import NoInfo from "../utils/NoInfo";
+import Button from "../components/ui/Button";
 import Loading from "../utils/Loading";
+import { useAuthHook } from "../hooks/useAuthHook";
 
 
 const Home = () => {
     const [foodInfo, setFoodInfo] = useState<IMenu[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const navigate = useNavigate();
+    const { authenticated } = useAuthHook();
 
     useEffect(() => {
         const foodList = async () => {
@@ -32,9 +36,20 @@ const Home = () => {
             <div className='hero-info'>
                 <h1>The BEST Fast Food
                     place in your area!</h1>
-                <Link to={"/logIn"}>
-                    <button>Create account to order!</button>
-                </Link>
+                {
+                    authenticated ?
+                        <Button className=""
+                            type="button"
+                            onClick={() => navigate("/order")}>
+                            Order Now!
+                        </Button>
+                        :
+                        <Button className=""
+                            type="button"
+                            onClick={() => navigate("/signup")}>
+                            Create account to order!
+                        </Button>
+                }
             </div>
             <div className='heroImg-container'>
                 {
