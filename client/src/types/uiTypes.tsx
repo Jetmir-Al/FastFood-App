@@ -6,13 +6,13 @@ export interface IButtonProps {
 }
 
 export interface ICardProps {
+    address: string;
     orderID: number;
+    orderItemID: number;
     foodName: string;
     foodImg: string;
     quantity: number;
     foodDesc: string;
-    address: string;
-    orderTime: Date;
     orderDate: Date;
     status: string;
     fullPrice: number;

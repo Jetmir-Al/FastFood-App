@@ -33,6 +33,7 @@ const Order = () => {
     const OrderFormFunc = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
+            console.log(address, foodID, quantity)
             const res = await orderForm(address, foodID, quantity);
             if (res.message === "Inserted Successfully!") {
                 setSubmitOrder(true);
@@ -66,13 +67,13 @@ const Order = () => {
                     <label className='orderLbl'>
                         Menu: <br />
                         <select id="orderItem" className='orderItem' name="orderItem" required
-                            value={foodID}
+                            defaultValue={""}
                             onChange={(e) => setFoodID(Number(e.target.value))}
                         >
                             <option value="" disabled>Select Food to Order:</option>
                             {
                                 food?.map((res: IMenu) => (
-                                    <option key={res.foodID} value={res.foodID}>{res.foodName} ~ {res.price}€</option>
+                                    <option key={res.foodID} value={Number(res.foodID)}>{res.foodName} ~ {res.price}€</option>
                                 ))
                             }
                         </select>

@@ -2,26 +2,26 @@ import { api } from "./api"
 
 
 export const getOrderHistory = async () => {
-    const res = await api.get("/order/orderHistory");
+    const res = await api.get("/order/orderHistory", { withCredentials: true });
     return res.data;
 }
 
 export const getTopOrders = async () => {
-    const res = await api.get("/order/topOrders");
+    const res = await api.get("/order/topOrders", { withCredentials: true });
     return res.data;
 }
 
 export const getLiveOrder = async () => {
-    const res = await api.get("/oder/getLiveOrders");
+    const res = await api.get("/oder/getLiveOrders", { withCredentials: true });
     return res.data;
 }
 
 export const getActiveOrders = async () => {
-    const res = await api.get("/order/activeOrders");
+    const res = await api.get("/order/activeOrders", { withCredentials: true });
     return res.data;
 }
 
 export const orderForm = async (address: string, foodID: number, quantity: number) => {
-    const res = await api.post("/order/orderForm", { address, foodID, quantity });
+    const res = await api.post("/order/orderForm", { address, foodID, quantity }, { withCredentials: true });
     return res.data;
 }

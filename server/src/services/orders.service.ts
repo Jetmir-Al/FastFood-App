@@ -14,7 +14,9 @@ export const OrderService = {
     },
 
     async orderForm(customerID: number, address: string, foodID: number, quantity: number) {
-        await OrderModel.Order(customerID, address, foodID, quantity);
+        const id = await OrderModel.Order(customerID, address);
+        await OrderModel.InsertOrderItems(id, foodID, quantity);
+
     },
 
     async getLiveOrders() {
@@ -22,14 +24,14 @@ export const OrderService = {
     },
 
     async deliverOrder(orderID: number, deliveryManID: number) {
-        await OrderModel.takeToDeliver(orderID, deliveryManID);
+        return await OrderModel.takeToDeliver(orderID, deliveryManID);
     },
 
     async activeOrders(customerID: number) {
-        await OrderModel.ActiveOrders(customerID);
+        return await OrderModel.ActiveOrders(customerID);
     },
 
     async cancelOrder(orderID: number) {
-        await OrderModel.CancelOrder(orderID);
+        return await OrderModel.CancelOrder(orderID);
     }
 }

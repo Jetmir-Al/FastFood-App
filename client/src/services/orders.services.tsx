@@ -23,7 +23,7 @@ export const useOrderForm = () => {
             const res = await orderForm(address, foodID, quantity);
             return res;
         } catch {
-            return null;
+            return "Problem with form!";
         }
     }
 }

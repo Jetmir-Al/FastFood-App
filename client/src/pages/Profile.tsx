@@ -7,9 +7,9 @@ import "./styles/profile.css";
 import Error from '../utils/Error';
 import Card from '../components/ui/Card';
 import { useDeleteAcc, useLogout } from '../services/auth.services';
-import { useGetActiveOrders } from '../services/orders.services';
 import { type ICardProps } from '../types/uiTypes';
 import NoInfo from '../utils/NoInfo';
+import { getActiveOrders, getOrderHistory } from '../api/order.api';
 
 const Profile = () => {
 
@@ -18,17 +18,28 @@ const Profile = () => {
     const [oldPsw, setOldPsw] = useState<string>("");
     const [err, setErr] = useState<boolean>(false);
     const [activeOrder, setActiveOrder] = useState<ICardProps[] | null>(null);
+    const [orderHistory, setOrderHistory] = useState<ICardProps[] | null>(null);
     const { user } = useAuthHook();
     const Logout = useLogout();
     const DeleteAcc = useDeleteAcc();
-    const getActiveOrders = useGetActiveOrders();
     useEffect(() => {
         const getOrders = async () => {
-            const res = await getActiveOrders();
-            setActiveOrder(res);
+            try {
+                const res = await getActiveOrders();
+                const orderHisto = await getOrderHistory();
+                setOrderHistory(orderHisto);
+                setActiveOrder(res);
+            } catch {
+                return <Error
+                    title='Problem getting Active Orders'
+                    details={null}
+                    onRetry={() => { }}
+                />
+            }
         }
         getOrders();
-    }, [getActiveOrders])
+
+    }, []);
 
     const logoutFunc = async () => {
         try {
@@ -102,24 +113,48 @@ const Profile = () => {
                 </div>
             </div>
             <h2>Active Orders</h2>
-            {
-                activeOrder?.length === 0 ?
-                    <NoInfo noInfo='No active orders yet!' />
-                    : activeOrder?.map((order: ICardProps) => (
-                        <Card
-                            key={order.orderID}
-                            orderID={order.orderID}
-                            quantity={order.quantity}
-                            foodDesc={order.foodDesc}
-                            foodImg={order.foodImg}
-                            foodName={order.foodName}
-                            fullPrice={order.fullPrice}
-                            orderTime={order.orderTime}
-                            orderDate={order.orderDate}
-                            address={order.address}
-                            status={order.status} />
-                    ))
-            }
+            <div className='activeOrders'>
+
+                {
+                    activeOrder?.length === 0 ?
+                        <NoInfo noInfo='No active orders yet!' />
+                        : activeOrder?.map((order: ICardProps) => (
+                            <Card
+                                key={order.orderItemID}
+                                orderItemID={order.orderItemID}
+                                orderID={order.orderID}
+                                quantity={order.quantity}
+                                foodDesc={order.foodDesc}
+                                foodImg={order.foodImg}
+                                foodName={order.foodName}
+                                fullPrice={order.fullPrice}
+                                orderDate={order.orderDate}
+                                address={order.address}
+                                status={order.status} />
+                        ))
+                }
+            </div>
+            <h2>Order History</h2>
+            <div className='activeOrders'>
+                {
+                    orderHistory?.length === 0 ?
+                        <NoInfo noInfo='No order history!' />
+                        : orderHistory?.map((order: ICardProps) => (
+                            <Card
+                                key={order.orderItemID}
+                                orderItemID={order.orderItemID}
+                                orderID={order.orderID}
+                                quantity={order.quantity}
+                                foodDesc={order.foodDesc}
+                                foodImg={order.foodImg}
+                                foodName={order.foodName}
+                                fullPrice={order.fullPrice}
+                                orderDate={order.orderDate}
+                                address={order.address}
+                                status={order.status} />
+                        ))
+                }
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { db } from "../config/db";
 import { IInsertOrder } from "../types/Order";
 
@@ -48,9 +48,8 @@ export const OrderModel = {
         return rowsOrdersHisto;
     },
 
-    //left to fix
-    async Order(customerID: number, address: string, foodID: number, quantity: number) {
-        const [insertOrder] = await db.execute<IInsertOrder & RowDataPacket[]>(
+    async Order(customerID: number, address: string) {
+        const [insertOrder] = await db.execute<ResultSetHeader>(
             `
     INSERT INTO orders 
     (customerID, address) 
@@ -58,7 +57,10 @@ export const OrderModel = {
     (?, ?)
         `, [customerID, address]
         );
-        const id = insertOrder.newID;
+        return insertOrder.insertId;
+    },
+
+    async InsertOrderItems(id: number, foodID: number, quantity: number) {
 
         await db.execute(
             `
@@ -106,18 +108,17 @@ export const OrderModel = {
     async ActiveOrders(customerID: number) {
         const [rowsActiveOrders] = await db.execute(
             `SELECT 
-        DATE_FORMAT(orderDate, '%h:%i %p %d/%m/%Y') AS orderDate, orders.orderID, orderItemID,
+       orderDate, orders.orderID, orderItemID,
         foodImg, foodName, foodDesc, quantity, 
-        price*quantity as fullPrice, customerID, 
+        price*quantity as fullPrice, 
         status, address
         FROM order_items
         INNER JOIN orders ON order_items.orderID = orders.orderID
         INNER JOIN fastfood ON order_items.foodID = fastfood.foodID
-        WHERE customerID = ? AND status NOT LIKE 'delivered' AND status NOT LIKE 'canceled'
-        ORDER BY orders.orderDate DESC`
-            , [customerID]
+        WHERE orders.customerID = ? AND status NOT IN ('delivered', 'canceled')
+        ORDER BY orders.orderDate DESC;`, [customerID]
         )
-        return rowsActiveOrders
+        return rowsActiveOrders;
     },
 
     async CancelOrder(orderID: number) {

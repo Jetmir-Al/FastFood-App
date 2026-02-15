@@ -1,14 +1,28 @@
+.activeOrders {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
 .card-container {
     display: flex;
+    gap: 1rem;
+    border-radius: 20px;
     padding: 0.5rem 1rem;
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--accent-color);
     box-shadow: var(--boxShadow);
-    background-color: var(--container-color);
-    min-width: 500px;
+    background-color: var(--border-color);
+    flex-basis: 550px;
 }
 
 .foodImg {
-    min-height: 200px;
+    max-width: 200px;
+    object-fit: contain;
+    background-color: var(--white-color);
+    border-radius: 20px;
 }
 
 .cardInfo {
@@ -24,7 +38,7 @@
     gap: 10px;
 }
 
-.foodInfo h4 {
+.foodInfo h5 {
     width: 100%;
     display: flex;
     justify-content: space-between;

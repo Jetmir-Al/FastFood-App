@@ -8,6 +8,7 @@
 }
 
 .order {
+    text-align: center;
     width: 420px;
     max-width: 95%;
     margin: 4rem auto;
@@ -19,6 +20,9 @@
     position: relative;
 }
 
+.order h3 {
+    margin: 0.5rem 0;
+}
 
 
 .order input {

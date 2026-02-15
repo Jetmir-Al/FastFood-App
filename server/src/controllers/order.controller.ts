@@ -85,9 +85,9 @@ export const ActiveOrders = async (req: Request, res: Response) => {
             return res.status(404).json({ message: "Cookie not found" });
         }
         const payload = verifyToken(token);
-        const ative = await OrderService.activeOrders(payload.userID);
+        const active = await OrderService.activeOrders(payload.userID);
 
-        res.status(200).json(ative);
+        res.status(200).json(active);
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }

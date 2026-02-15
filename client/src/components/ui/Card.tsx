@@ -1,32 +1,36 @@
+import { getImageUrl } from "../../api/food.api";
 import type { ICardProps } from "../../types/uiTypes";
 import "./card.css";
 
 
-const Card = ({ foodName, foodImg, quantity, foodDesc, address, orderTime, orderDate, status, fullPrice }: ICardProps) => {
+const Card = ({ orderItemID, orderID, foodName, foodImg, quantity, foodDesc, address, orderDate, status, fullPrice }: ICardProps) => {
     return (
         <div className='card-container'>
-            <img src={foodImg} alt='image' className='foodImg' />
+            <img src={getImageUrl(foodImg)} alt='image' className='foodImg' />
             <div className='cardInfo'>
                 <h2>
                     {foodName} / {quantity}
                 </h2>
                 <div className='foodInfo'>
-                    <h4> Food description:
+                    <h5> Description:
                         <span> {foodDesc}</span>
-                    </h4>
-                    <h4>
+                    </h5>
+                    <h5>
                         Status:
-                        <span> {status}</span>
-                    </h4>
-                    <h4>
+                        <span> {status.toUpperCase()}</span>
+                    </h5>
+                    <h5>
                         Price:
                         <span > {fullPrice}$</span>
-                    </h4>
-                    <h4>
+                    </h5>
+                    <h5>
                         Date:
-                        <span> {orderDate.toDateString()}</span>
-                        <span> {orderTime.toLocaleTimeString()}</span>
-                    </h4>
+                        <span> {new Date(orderDate).toLocaleString()}</span>
+                    </h5>
+                    <h5>
+                        Address:
+                        <address> {address}</address>
+                    </h5>
 
                 </div>
             </div>
