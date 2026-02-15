@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhoneVolume } from '@fortawesome/free-solid-svg-icons';
 import Button from '../components/ui/Button';
-import { useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuthHook } from '../hooks/useAuthHook';
 import "./styles/profile.css";
-import { logout } from '../api/auth.api';
 import Error from '../utils/Error';
 import Card from '../components/ui/Card';
+import { useDeleteAcc, useLogout } from '../services/auth.services';
+import { useGetActiveOrders } from '../services/orders.services';
+import { type ICardProps } from '../types/uiTypes';
+import NoInfo from '../utils/NoInfo';
 
 const Profile = () => {
 
@@ -15,15 +17,22 @@ const Profile = () => {
     const [newPsw, setNewPsw] = useState<string>("");
     const [oldPsw, setOldPsw] = useState<string>("");
     const [err, setErr] = useState<boolean>(false);
-    const navigate = useNavigate();
-    const { user, setUser, setAuth } = useAuthHook();
+    const [activeOrder, setActiveOrder] = useState<ICardProps[] | null>(null);
+    const { user } = useAuthHook();
+    const Logout = useLogout();
+    const DeleteAcc = useDeleteAcc();
+    const getActiveOrders = useGetActiveOrders();
+    useEffect(() => {
+        const getOrders = async () => {
+            const res = await getActiveOrders();
+            setActiveOrder(res);
+        }
+        getOrders();
+    }, [getActiveOrders])
 
     const logoutFunc = async () => {
         try {
-            await logout();
-            setAuth(false);
-            setUser(null);
-            navigate("/");
+            await Logout();
         } catch {
             setErr(true);
         }
@@ -79,20 +88,38 @@ const Profile = () => {
                         <Button
                             type='button'
                             className=''
-                            onClick={() => logoutFunc()}
+                            onClick={async () => await logoutFunc()}
                         >Logout
                         </Button>
                         <Button
                             className=''
                             type='button'
-                            onClick={() => { }}>
+                            onClick={async () => await DeleteAcc()}>
                             Delete Account
                         </Button>
                     </div>
 
                 </div>
             </div>
-            <Card quantity={2} foodDesc='sss' foodImg='ss' foodName='ss' fullPrice={12} orderTime={new Date} orderDate={new Date} address='sdfnsn' status='yes' />
+            <h2>Active Orders</h2>
+            {
+                activeOrder?.length === 0 ?
+                    <NoInfo noInfo='No active orders yet!' />
+                    : activeOrder?.map((order: ICardProps) => (
+                        <Card
+                            key={order.orderID}
+                            orderID={order.orderID}
+                            quantity={order.quantity}
+                            foodDesc={order.foodDesc}
+                            foodImg={order.foodImg}
+                            foodName={order.foodName}
+                            fullPrice={order.fullPrice}
+                            orderTime={order.orderTime}
+                            orderDate={order.orderDate}
+                            address={order.address}
+                            status={order.status} />
+                    ))
+            }
         </div>
     )
 }

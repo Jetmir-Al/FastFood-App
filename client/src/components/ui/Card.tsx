@@ -4,13 +4,13 @@ import "./card.css";
 
 const Card = ({ foodName, foodImg, quantity, foodDesc, address, orderTime, orderDate, status, fullPrice }: ICardProps) => {
     return (
-        <div className='new__card swiper-slide' id='boughtBooks'>
-            <img src={foodImg} alt='image' className='new__img' min-height='200px' />
-            <div className='boughtInfo'>
-                <h2 className='testimonial__title'>
+        <div className='card-container'>
+            <img src={foodImg} alt='image' className='foodImg' />
+            <div className='cardInfo'>
+                <h2>
                     {foodName} / {quantity}
                 </h2>
-                <div className='boughtBookInfo'>
+                <div className='foodInfo'>
                     <h4> Food description:
                         <span> {foodDesc}</span>
                     </h4>
@@ -25,6 +25,7 @@ const Card = ({ foodName, foodImg, quantity, foodDesc, address, orderTime, order
                     <h4>
                         Date:
                         <span> {orderDate.toDateString()}</span>
+                        <span> {orderTime.toLocaleTimeString()}</span>
                     </h4>
 
                 </div>

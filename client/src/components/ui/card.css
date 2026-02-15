@@ -1,0 +1,35 @@
+.card-container {
+    display: flex;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--boxShadow);
+    background-color: var(--container-color);
+    min-width: 500px;
+}
+
+.foodImg {
+    min-height: 200px;
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.foodInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.foodInfo h4 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+span {
+    color: var(--text-color);
+}

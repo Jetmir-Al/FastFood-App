@@ -6,14 +6,18 @@ import { getFoodItems } from '../../api/food.api';
 import { type IMenu } from '../../types/foodTypes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHamburger } from '@fortawesome/free-solid-svg-icons';
+import { useOrderForm } from '../../services/orders.services';
 
 const Order = () => {
     const navigate = useNavigate();
     const [submitOrder, setSubmitOrder] = useState(false);
+    const [submitErr, setSubmitErr] = useState(false);
     const [food, setFood] = useState<IMenu[] | null>(null);
-    const [foodID, setFoodID] = useState('');
-    const [quantity, setQuantity] = useState(1);
-    const [address, setAdress] = useState('');
+    const [foodID, setFoodID] = useState<number>(0);
+    const [quantity, setQuantity] = useState<number>(1);
+    const [address, setAdress] = useState<string>('');
+    const orderForm = useOrderForm();
+
     useEffect(() => {
         const foodList = async () => {
             try {
@@ -26,13 +30,25 @@ const Order = () => {
         foodList();
     }, []);
 
-
+    const OrderFormFunc = async (event: React.SubmitEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const res = await orderForm(address, foodID, quantity);
+            if (res.message === "Inserted Successfully!") {
+                setSubmitOrder(true);
+                setSubmitErr(false);
+            }
+        } catch {
+            setSubmitErr(true);
+            setSubmitOrder(false);
+        }
+    }
 
     return (
         <>
             <div className='order-container'>
 
-                <form className='order' onSubmit={() => { }}>
+                <form className='order' onSubmit={OrderFormFunc}>
                     <h2 className='authTitle'>
                         Order <FontAwesomeIcon icon={faHamburger} />
                     </h2>
@@ -51,7 +67,7 @@ const Order = () => {
                         Menu: <br />
                         <select id="orderItem" className='orderItem' name="orderItem" required
                             value={foodID}
-                            onChange={(e) => setFoodID(e.target.value)}
+                            onChange={(e) => setFoodID(Number(e.target.value))}
                         >
                             <option value="" disabled>Select Food to Order:</option>
                             {
@@ -63,7 +79,9 @@ const Order = () => {
                     </label>
                     <label className='orderLbl'>
                         Quantity: <br />
-                        <input type="number" onChange={(e) => setQuantity(e.target.valueAsNumber)} required />
+                        <input type="number"
+                            minLength={1}
+                            onChange={(e) => setQuantity(e.target.valueAsNumber)} required />
                     </label>
                     <div className='btn-continer'>
                         <Button

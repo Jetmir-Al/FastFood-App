@@ -39,5 +39,6 @@ export const deleteAcc = async () => {
 }
 
 export const logout = async () => {
-    await api.post("/auth/logout", {}, { withCredentials: true });
+    const res = await api.post("/auth/logout", {}, { withCredentials: true });
+    return res.data;
 }
