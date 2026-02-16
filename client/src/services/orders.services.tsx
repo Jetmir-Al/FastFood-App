@@ -16,6 +16,20 @@ export const useGetActiveOrders = () => {
         }
     }
 }
+export const useGetLiveOrders = () => {
+    return async function () {
+        try {
+            const res = await getLiveOrder();
+            return res;
+        } catch {
+            return <Error
+                title="Error getting live orders"
+                details={null}
+                onRetry={async () => await getActiveOrders()}
+            />
+        }
+    }
+}
 
 export const useOrderForm = () => {
     return async function (address: string, foodID: number, quantity: number) {
@@ -23,7 +37,7 @@ export const useOrderForm = () => {
             const res = await orderForm(address, foodID, quantity);
             return res;
         } catch {
-            return "Problem with form!";
+            // 
         }
     }
 }

@@ -36,7 +36,7 @@ export const OrderModel = {
 
     async OrderHisto(customerID: number) {
         const [rowsOrdersHisto] = await db.execute(
-            `SELECT DATE_FORMAT(orderDate, '%d/%m/%Y') AS orderDate,DATE_FORMAT(orderDate, '%h:%i %p') AS orderTime, orders.orderID, orderItemID,
+            `SELECT orderDate, orders.orderID, orderItemID,
         foodImg, foodName, foodDesc, quantity, price*quantity as fullPrice, customerID, 
         status, address
         FROM order_items
@@ -76,7 +76,7 @@ export const OrderModel = {
         const [rowsLiveOrders] = await db.execute(
             `
         SELECT 
-        DATE_FORMAT(orderDate, '%h:%i %p') AS orderTime, DATE_FORMAT(orderDate, '%d/%m/%Y') AS orderDate, orders.orderID, orderItemID,
+        orderDate, orders.orderID, orderItemID,
         foodImg, foodName, foodDesc, quantity, 
         price*quantity as fullPrice, customerID, 
         status, address

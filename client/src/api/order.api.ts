@@ -25,3 +25,8 @@ export const orderForm = async (address: string, foodID: number, quantity: numbe
     const res = await api.post("/order/orderForm", { address, foodID, quantity }, { withCredentials: true });
     return res.data;
 }
+
+export const cancelOrder = async (orderID: number) => {
+    const res = await api.post("/order/cancelOrder", { orderID }, { withCredentials: true });
+    return res.data;
+}
