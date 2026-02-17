@@ -16,15 +16,16 @@ export const DeliveryService = {
             if (res.message !== "Update Successfully!") {
                 throw new BadRequestError("Invalid request");
             }
+            return res;
         }
     },
 
     async delivHisto(userID: number) {
-        await DeliveryModal.DeliveryHistory(userID);
+        return await DeliveryModal.DeliveryHistory(userID);
     },
 
     async getAllDeliveries() {
-        await DeliveryModal.allDeliveries();
+        return await DeliveryModal.allDeliveries();
     },
 
     async delDelivery(deliveryID: number) {
@@ -32,10 +33,11 @@ export const DeliveryService = {
         if (res.message !== "Deleted Successfully!") {
             throw new BadRequestError("Invalid request");
         }
+        return res;
     },
 
     async getActiveDelivery(userID: number) {
-        await DeliveryModal.activeDelivery(userID);
+        return await DeliveryModal.activeDelivery(userID);
     },
 
     async updateAsDelivered(deliveryID: number) {

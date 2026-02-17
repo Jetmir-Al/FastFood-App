@@ -13,7 +13,7 @@ const Home = () => {
     const [foodInfo, setFoodInfo] = useState<IMenu[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
-    const { authenticated } = useAuthHook();
+    const { authenticated, user } = useAuthHook();
 
     useEffect(() => {
         const foodList = async () => {
@@ -38,11 +38,18 @@ const Home = () => {
                     place in your area!</h1>
                 {
                     authenticated ?
-                        <Button className=""
-                            type="button"
-                            onClick={() => navigate("/order")}>
-                            Order Now!
-                        </Button>
+                        user?.role === "customer" ?
+                            <Button className=""
+                                type="button"
+                                onClick={() => navigate("/order")}>
+                                Order Now!
+                            </Button>
+                            :
+                            <Button className=""
+                                type="button"
+                                onClick={() => navigate("/delivery")}>
+                                Deliver Now!
+                            </Button>
                         :
                         <Button className=""
                             type="button"

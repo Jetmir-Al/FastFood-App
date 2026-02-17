@@ -8,17 +8,32 @@ import Error from '../utils/Error';
 import { useDeleteAcc, useLogout } from '../services/auth.services';
 import ActiveOrders from '../components/order/ActiveOrders';
 import OrderHistory from '../components/order/OrderHistory';
+import { UpdatePsw } from '../api/auth.api';
 const Profile = () => {
 
     const [updatePsw, setUpdatePsw] = useState<boolean>(false);
     const [newPsw, setNewPsw] = useState<string>("");
     const [oldPsw, setOldPsw] = useState<string>("");
     const [err, setErr] = useState<boolean>(false);
-    const { user } = useAuthHook();
+    const { user, reFetchFunc } = useAuthHook();
     const Logout = useLogout();
     const DeleteAcc = useDeleteAcc();
 
-
+    const updatePassword = async () => {
+        try {
+            const res = await UpdatePsw(oldPsw, newPsw);
+            if (res.message === "Updated Successfully!") {
+                reFetchFunc(true);
+                setUpdatePsw(false);
+            }
+        } catch {
+            return <Error
+                title='Error updating password'
+                details={"Try later"}
+                onRetry={() => { }}
+            />
+        }
+    }
     const logoutFunc = async () => {
         try {
             await Logout();
@@ -47,7 +62,7 @@ const Profile = () => {
                         }</h3>
                         <h3> <FontAwesomeIcon className='icons' icon={faPhoneVolume} /> {user?.phone}</h3>
                         {
-                            updatePsw ? <form className="updatePsw" onSubmit={() => { }}>
+                            updatePsw ? <form className="updatePsw" onSubmit={updatePassword}>
                                 <input className='inputPsw' type="password" placeholder="Enter your old password" onChange={(e) => setOldPsw(e.target.value)} />
                                 <input className='inputPsw' type="password" placeholder="Enter your new password" onChange={(e) => setNewPsw(e.target.value)} />
                                 <div className="accinfo-btns">

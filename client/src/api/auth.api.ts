@@ -20,7 +20,7 @@ export const register = async (name: string, email: string, passwordHash: string
     return res.data;
 };
 
-export const updatePsw = async (oldPsw: string, newPsw: string) => {
+export const UpdatePsw = async (oldPsw: string, newPsw: string) => {
     const res = await api.put("/auth/updatePsw", {
         oldPsw,
         newPsw

@@ -76,8 +76,7 @@ export const OrderModel = {
         const [rowsLiveOrders] = await db.execute(
             `
         SELECT 
-        orderDate, orders.orderID, orderItemID,
-        foodImg, foodName, foodDesc, quantity, 
+        orderDate, orders.orderID, orderItemID, foodName, foodDesc, quantity, 
         price*quantity as fullPrice, customerID, 
         status, address
         FROM order_items

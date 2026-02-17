@@ -12,7 +12,7 @@ export const getTopOrders = async () => {
 }
 
 export const getLiveOrder = async () => {
-    const res = await api.get("/oder/getLiveOrders", { withCredentials: true });
+    const res = await api.get("/order/getLiveOrders", { withCredentials: true });
     return res.data;
 }
 
@@ -28,5 +28,10 @@ export const orderForm = async (address: string, foodID: number, quantity: numbe
 
 export const cancelOrder = async (orderID: number) => {
     const res = await api.post("/order/cancelOrder", { orderID }, { withCredentials: true });
+    return res.data;
+}
+
+export const takeToDeliver = async (orderID: number) => {
+    const res = await api.post("/order/takeToDeliver", { orderID }, { withCredentials: true });
     return res.data;
 }

@@ -71,7 +71,7 @@ export const takeToDeliver = async (req: Request, res: Response) => {
         const payload = verifyToken(token);
         await OrderService.deliverOrder(orderID, payload.userID);
 
-
+        res.status(200).json({ message: "Ready to deliver!" });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
