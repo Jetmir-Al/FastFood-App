@@ -15,7 +15,7 @@ export const DeliveryModal = {
     async DeliveryHistory(userID: number) {
         const [rowsDeliveryHistory] = await db.execute(`
     SELECT deliveryID,deliveryManID, orders.orderID, customerID, address, 
-    DATE_FORMAT(orderDate, '%d/%m/%Y') AS orderDate,UPPER(status) as status, delivered,
+    orderDate,UPPER(status) as status, delivered,
     foodName, foodDesc, foodImg, quantity, price*quantity as fullPrice
     FROM delivery 
     INNER JOIN orders ON delivery.orderID = orders.orderID 
@@ -73,7 +73,7 @@ export const DeliveryModal = {
     async activeDelivery(userID: number) {
         const [rowsDeliveryActive] = await db.execute(`
     SELECT deliveryID,deliveryManID, orders.orderID, customerID, address, 
-    DATE_FORMAT(orderDate, '%h:%i %p %d/%m/%Y') AS orderDate, status, delivered,
+    orderDate, status, delivered,
     foodName, foodDesc, foodImg, quantity, price*quantity as fullPrice 
     FROM delivery 
     INNER JOIN orders ON delivery.orderID = orders.orderID 

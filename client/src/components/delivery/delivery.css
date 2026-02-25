@@ -89,6 +89,13 @@
     gap: 10px;
 }
 
+.header-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--border-color);
+    border-radius: 5px;
+    color: var(--first-color-hover);
+}
+
 
 
 

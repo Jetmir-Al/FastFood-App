@@ -3,15 +3,17 @@ import "./delivery.css";
 import type { ICardProps } from "../../types/uiTypes";
 import Error from "../../utils/Error";
 import { getLiveOrder, takeToDeliver } from "../../api/order.api";
+import Button from "../ui/Button";
+import { useNavigate } from "react-router";
 
 const Delivery = () => {
     const [liveOrders, setLiveOrders] = useState<ICardProps[] | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const GetLiveOrders = async () => {
             try {
                 const res = await getLiveOrder();
-                console.log(res);
                 setLiveOrders(res);
             } catch {
                 return <Error
@@ -28,7 +30,8 @@ const Delivery = () => {
         try {
             const res = await takeToDeliver(orderID);
             if (res.message === "Ready to deliver!") {
-                await getLiveOrder();
+                const res = await getLiveOrder();
+                setLiveOrders(res);
             }
         } catch {
             return <Error
@@ -43,6 +46,12 @@ const Delivery = () => {
         <div className="liveOrders-container">
             <div className='usersHeader'>
                 <h2 className="header-title">Live Orders</h2>
+                <Button
+                    className="header-btn"
+                    type="button"
+                    onClick={() => navigate("/active_Deliveries")}>
+                    Active Deliveries
+                </Button>
             </div>
             <div className='table-wrapper'>
 

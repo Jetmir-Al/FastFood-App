@@ -16,4 +16,6 @@ export interface ICardProps {
     orderDate: Date;
     status: string;
     fullPrice: number;
+    markAsDelivered: boolean;
+    callFunc: () => void | Promise<void>;
 }

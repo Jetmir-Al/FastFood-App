@@ -9,6 +9,7 @@ import { useDeleteAcc, useLogout } from '../services/auth.services';
 import ActiveOrders from '../components/order/ActiveOrders';
 import OrderHistory from '../components/order/OrderHistory';
 import { UpdatePsw } from '../api/auth.api';
+import DeliveryHistory from '../components/delivery/DeliveryHistory';
 const Profile = () => {
 
     const [updatePsw, setUpdatePsw] = useState<boolean>(false);
@@ -106,11 +107,16 @@ const Profile = () => {
                 </div>
             </div>
             {
-                user?.role === "customer" &&
-                <>
-                    <ActiveOrders />
-                    <OrderHistory />
-                </>
+                user?.role === "customer" ?
+                    <>
+                        <ActiveOrders />
+                        <OrderHistory />
+                    </>
+                    : user?.role === "delivery" &&
+                    <>
+                        <DeliveryHistory />
+                    </>
+
             }
         </div>
     )

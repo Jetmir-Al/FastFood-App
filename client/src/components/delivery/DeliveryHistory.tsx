@@ -1,41 +1,49 @@
 import { useEffect, useState } from "react";
-import { getActiveOrders } from "../../api/order.api";
-import Error from "../../utils/Error";
 import type { ICardProps } from "../../types/uiTypes";
 import NoInfo from "../../utils/NoInfo";
 import Card from "../ui/Card";
+import Error from "../../utils/Error";
+import { getDeliveryHistory } from "../../api/delivery.api";
+import Loading from "../../utils/Loading";
 
 
-const ActiveOrders = () => {
-    const [activeOrder, setActiveOrder] = useState<ICardProps[] | null>(null);
-
+const DeliveryHistory = () => {
+    const [deliveryHistory, setDeliveryHistory] = useState<ICardProps[] | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const getOrders = async () => {
+        const deliveryHistory = async () => {
             try {
-                const res = await getActiveOrders();
-                setActiveOrder(res);
+                const res = await getDeliveryHistory();
+                setDeliveryHistory(res);
+                setLoading(false);
             } catch {
                 return <Error
-                    title='Problem getting Active Orders'
-                    details={null}
-                    onRetry={() => { }}
+                    title="Problem getting history of deliveries"
+                    details={"Try again later"}
+                    onRetry={async () => {
+                        const res = await getDeliveryHistory();
+                        setDeliveryHistory(res);
+                        setLoading(false);
+                    }}
                 />
             }
         }
-        getOrders();
-
+        deliveryHistory();
     }, []);
+
+    if (loading) {
+        return <Loading />
+    }
 
     return (
         <>
-            <h2>Active Orders</h2>
+            <h2>Delivery History</h2>
             <div className='activeOrders'>
-
                 {
-                    activeOrder?.length === 0 ?
-                        <NoInfo noInfo='No active orders yet!' />
-                        : activeOrder?.map((order: ICardProps) => (
+                    deliveryHistory?.length === 0 ?
+                        <NoInfo noInfo='No order history!' />
+                        : deliveryHistory?.map((order: ICardProps) => (
                             <Card
                                 key={order.orderItemID}
                                 orderItemID={order.orderItemID}
@@ -49,14 +57,13 @@ const ActiveOrders = () => {
                                 address={order.address}
                                 status={order.status}
                                 markAsDelivered={false}
-                                callFunc={() => {
-                                }}
+                                callFunc={() => { }}
                             />
                         ))
                 }
             </div>
         </>
-    )
+    );
 }
 
-export default ActiveOrders;
+export default DeliveryHistory;

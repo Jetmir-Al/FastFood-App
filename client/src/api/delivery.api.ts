@@ -4,3 +4,16 @@ import { api } from "./api"
 // export const getAllDeliveries = async () => {
 //     const res = await api.get("/delivery/")
 // }
+
+
+export const getDeliveryHistory = async () => {
+    const res = await api.get("/delivery/deliveryHistory", { withCredentials: true });
+
+    return res.data;
+}
+
+export const getActiveDeliveries = async () => {
+    const res = await api.get("/delivery/getActiveDeliveries", { withCredentials: true });
+
+    return res.data;
+}

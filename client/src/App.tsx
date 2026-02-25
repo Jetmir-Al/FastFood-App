@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import Order from './components/forms/Order';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Delivery from './components/delivery/Delivery';
+import ActiveDelivery from './components/delivery/ActiveDelivery';
 
 function App() {
   const { user } = useAuthHook();
@@ -25,21 +26,34 @@ function App() {
         <Route path='/menu' element={<Menu />} />
 
         <Route path='/' element={<Home />} />
-        <Route element={<ProtectedRoutes isAllowed={user === null} />}>
+        <Route element={
+          <ProtectedRoutes
+            isAllowed={user === null} />
+        }>
 
           <Route path='/login' element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
         </Route>
-        <Route element={<ProtectedRoutes isAllowed={!!user} />}>
+        <Route element={
+          <ProtectedRoutes
+            isAllowed={!!user} />
+        }>
           <Route path='/profile' element={<Profile />} />
         </Route>
 
-        <Route element={<ProtectedRoutes isAllowed={!!user && user?.role === "customer"} />}>
+        <Route element={
+          <ProtectedRoutes
+            isAllowed={!!user && user?.role === "customer"} />
+        }>
           <Route path='/order' element={<Order />} />
         </Route>
 
-        <Route element={<ProtectedRoutes isAllowed={!!user && user?.role === "delivery"} />}>
+        <Route element={
+          <ProtectedRoutes
+            isAllowed={!!user && user?.role === "delivery"} />
+        }>
           <Route path='/delivery' element={<Delivery />} />
+          <Route path='/active_Deliveries' element={<ActiveDelivery />} />
         </Route>
 
 

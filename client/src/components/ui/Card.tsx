@@ -1,12 +1,13 @@
 import { getImageUrl } from "../../api/food.api";
 import { cancelOrder } from "../../api/order.api";
+import { useAuthHook } from "../../hooks/useAuthHook";
 import type { ICardProps } from "../../types/uiTypes";
 import Button from "./Button";
 import "./card.css";
 
 
-const Card = ({ orderID, foodName, foodImg, quantity, foodDesc, address, orderDate, status, fullPrice }: ICardProps) => {
-
+const Card = ({ orderID, foodName, foodImg, quantity, foodDesc, address, orderDate, status, fullPrice, markAsDelivered, callFunc }: ICardProps) => {
+    const { user } = useAuthHook();
 
     return (
         <div className='card-container'>
@@ -40,9 +41,20 @@ const Card = ({ orderID, foodName, foodImg, quantity, foodDesc, address, orderDa
                         <Button className="ordersBtn"
                             type="button"
                             onClick={async () => {
-                                cancelOrder(orderID);
+                                const res = await cancelOrder(orderID);
+                                if (res.message === "Canceled Successfully!") {
+                                    await callFunc();
+                                }
                             }}>
                             Cancel
+                        </Button>
+                    }
+                    {
+                        (user?.role === "delivery" && markAsDelivered) &&
+                        <Button
+                            className="ordersBtn"
+                            type="button">
+                            Mark As Delivered
                         </Button>
                     }
                 </div>
