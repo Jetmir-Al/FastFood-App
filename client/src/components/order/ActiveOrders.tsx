@@ -40,6 +40,7 @@ const ActiveOrders = () => {
                                 key={order.orderItemID}
                                 orderItemID={order.orderItemID}
                                 orderID={order.orderID}
+                                deliveryID={0}
                                 quantity={order.quantity}
                                 foodDesc={order.foodDesc}
                                 foodImg={order.foodImg}
@@ -49,7 +50,9 @@ const ActiveOrders = () => {
                                 address={order.address}
                                 status={order.status}
                                 markAsDelivered={false}
-                                callFunc={() => {
+                                callFunc={async () => {
+                                    const res = await getActiveOrders();
+                                    setActiveOrder(res);
                                 }}
                             />
                         ))

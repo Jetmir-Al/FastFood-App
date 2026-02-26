@@ -24,3 +24,13 @@ export const isDeleteDeliveryBody = (body: any): body is IDeleteDelivery => {
         body.deliveryID !== 0
     )
 }
+
+export const isMarkAsDeliveredBody = (body: any): body is IDeleteDelivery => {
+    return (
+        typeof body === "object" &&
+        typeof body.deliveryID === "number" &&
+        body.deliveryID !== 0 &&
+        typeof body.orderID === "number" &&
+        body.orderID !== 0
+    )
+}

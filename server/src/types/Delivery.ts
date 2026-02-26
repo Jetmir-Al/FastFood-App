@@ -10,3 +10,8 @@ export interface IUpdDelivery {
 export interface IDeleteDelivery {
     deliveryID: number;
 }
+
+export interface IMarkAsDelivered {
+    deliveryID: number;
+    orderID: number;
+}

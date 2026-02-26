@@ -40,11 +40,12 @@ export const DeliveryService = {
         return await DeliveryModal.activeDelivery(userID);
     },
 
-    async updateAsDelivered(deliveryID: number) {
+    async updateAsDelivered(deliveryID: number, orderID: number) {
         const res = await DeliveryModal.updAsDelivered(deliveryID);
 
-        if (res.message !== "Update Successfully!") {
+        if (res.message !== "Updated Successfully!") {
             throw new BadRequestError("Invalid request");
         }
+        await DeliveryModal.updateOrderAsDelivered(orderID);
     }
 }

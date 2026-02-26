@@ -93,4 +93,13 @@ export const DeliveryModal = {
 
         return { message: "Updated Successfully!" };
     },
+
+    async updateOrderAsDelivered(orderID: number) {
+        await db.execute(`
+             UPDATE orders SET orders.status = 'delivered'
+            WHERE orders.orderID = ?;
+            `, [orderID]);
+
+        return { message: "Updated Successfully!" };
+    },
 }

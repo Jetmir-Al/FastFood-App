@@ -35,6 +35,7 @@ const OrderHistory = () => {
                         <NoInfo noInfo='No order history!' />
                         : orderHistory?.map((order: ICardProps) => (
                             <Card
+                                deliveryID={0}
                                 key={order.orderItemID}
                                 orderItemID={order.orderItemID}
                                 orderID={order.orderID}

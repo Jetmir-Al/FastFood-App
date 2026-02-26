@@ -48,7 +48,8 @@ const ActiveDelivery = () => {
                         <NoInfo noInfo='No order history!' />
                         : activeDelivery?.map((order: ICardProps) => (
                             <Card
-                                key={order.orderItemID}
+                                key={order.deliveryID}
+                                deliveryID={order.deliveryID}
                                 orderItemID={order.orderItemID}
                                 orderID={order.orderID}
                                 quantity={order.quantity}
@@ -60,7 +61,10 @@ const ActiveDelivery = () => {
                                 address={order.address}
                                 status={order.status}
                                 markAsDelivered={true}
-                                callFunc={() => { }}
+                                callFunc={async () => {
+                                    const res = await getActiveDeliveries();
+                                    setActiveDelivery(res);
+                                }}
                             />
                         ))
                 }

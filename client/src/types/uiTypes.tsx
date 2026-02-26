@@ -8,6 +8,7 @@ export interface IButtonProps {
 export interface ICardProps {
     address: string;
     orderID: number;
+    deliveryID: number;
     orderItemID: number;
     foodName: string;
     foodImg: string;

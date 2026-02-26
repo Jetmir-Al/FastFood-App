@@ -46,6 +46,7 @@ const DeliveryHistory = () => {
                         : deliveryHistory?.map((order: ICardProps) => (
                             <Card
                                 key={order.orderItemID}
+                                deliveryID={0}
                                 orderItemID={order.orderItemID}
                                 orderID={order.orderID}
                                 quantity={order.quantity}
