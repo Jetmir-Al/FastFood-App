@@ -37,6 +37,12 @@ const NavBar = () => {
                         <Link to="/delivery">Delivery</Link>
                     </li>
                 }
+                {
+                    user?.role === "admin" &&
+                    <li>
+                        <Link to="/dashboard_panel">Dashboard</Link>
+                    </li>
+                }
             </ul>
             <div className='navbar-right'>
                 {

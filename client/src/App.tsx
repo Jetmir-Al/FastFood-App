@@ -13,6 +13,7 @@ import Order from './components/forms/Order';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import Delivery from './components/delivery/Delivery';
 import ActiveDelivery from './components/delivery/ActiveDelivery';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   const { user } = useAuthHook();
@@ -55,7 +56,12 @@ function App() {
           <Route path='/delivery' element={<Delivery />} />
           <Route path='/active_Deliveries' element={<ActiveDelivery />} />
         </Route>
-
+        <Route element={
+          <ProtectedRoutes
+            isAllowed={!!user && user?.role === "admin"} />
+        }>
+          <Route path='/dashboard_panel' element={<Dashboard />} />
+        </Route>
 
       </Routes>
     </Router>
