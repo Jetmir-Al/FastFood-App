@@ -5,6 +5,15 @@ export interface IButtonProps {
     className: string
 }
 
+export interface IDashboardHeader {
+    tHeader1: string;
+    tHeader2: string;
+    tHeader3: string;
+    tHeader4: string;
+    tHeader5: string;
+    tHeader6: string;
+}
+
 export interface ICardProps {
     address: string;
     orderID: number;

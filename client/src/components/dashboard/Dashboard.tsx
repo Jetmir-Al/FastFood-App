@@ -2,7 +2,7 @@ import { Activity, useState } from "react";
 import "./dashboard.css";
 import UsersDashboard from "./UsersDashboard";
 import OrderDashboard from "./OrderDashboard";
-import DeliveryDashboard from "./deliveryDashboard";
+import DeliveryDashboard from "./DeliveryDashboard";
 
 const Dashboard = () => {
 

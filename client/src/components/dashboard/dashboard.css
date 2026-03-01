@@ -6,3 +6,105 @@
     width: 100%;
     padding: 2rem 0;
 }
+
+
+.table-wrapper {
+    width: 80%;
+    overflow-x: auto;
+    background-color: var(--container-color);
+    border-radius: 1rem;
+    box-shadow: var(--boxShadow);
+}
+
+.dashboardTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--container-color);
+}
+
+.dashboardTable th,
+.dashboardTable td {
+    text-align: center;
+    padding: 1rem;
+}
+
+.dashboardTable th {
+    background-color: var(--first-color);
+    color: var(--white-color);
+    font: var(--h3);
+}
+
+.t-row:nth-child(even) {
+    background-color: var(--border-color);
+}
+
+.t-row:hover {
+    background-color: var(--white-color);
+}
+
+.tableBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: 0.5rem;
+}
+
+.update-btn,
+.delete-btn {
+    padding: 0.5rem 0.9rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.update-btn {
+    background-color: gold;
+    color: var(--white-color);
+}
+
+.update-btn:hover {
+    background-color: yellow;
+    color: var(--white-color);
+}
+
+.delete-btn {
+    background-color: var(--red);
+    color: var(--white-color);
+}
+
+.delete-btn:hover {
+    background-color: var(--redHover);
+}
+
+.noInfo-head {
+    width: 100%;
+}
+
+.noInfo-row {
+    width: 100%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    .dashboardTable {
+        width: 100%;
+    }
+
+    .table-wrapper {
+        width: 90%;
+    }
+
+    .dashboardTable td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .dashboardTable th {
+        font: var(--h5);
+    }
+}
