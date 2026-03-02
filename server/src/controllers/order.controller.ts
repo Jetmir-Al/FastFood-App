@@ -3,6 +3,7 @@ import { HttpError } from "../http/http.error";
 import { verifyToken } from "../utils/jwt";
 import { OrderService } from "../services/orders.service";
 import { IOrderForm, ITakeToDeliver } from "../types/Order";
+import { UserService } from "../services/user.service";
 
 
 export const topOrders = async (req: Request, res: Response) => {
@@ -99,6 +100,27 @@ export const CancelOrder = async (req: Request, res: Response) => {
 
         await OrderService.cancelOrder(orderID);
         res.status(200).json({ message: "Canceled Successfully!" });
+
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const getAllOrders = async (req: Request, res: Response) => {
+    try {
+        const token = req.cookies.access_token;
+        if (!token) {
+            return res.status(404).json({ message: "Cookie not found" });
+        }
+        const payload = verifyToken(token);
+        const user = await UserService.status(payload.userID);
+
+        if (user?.role !== 'admin') {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const active = await OrderService.AllOrders();
+        res.status(200).json(active);
 
     } catch (error: any) {
         res.status(500).json({ message: error.message });

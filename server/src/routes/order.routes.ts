@@ -1,6 +1,6 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth.middleware';
-import { OrderForm, orderHistory, topOrders, ActiveOrders, CancelOrder, getLiveOrder, takeToDeliver } from '../controllers/order.controller';
+import { OrderForm, orderHistory, topOrders, ActiveOrders, CancelOrder, getLiveOrder, takeToDeliver, getAllOrders } from '../controllers/order.controller';
 import { validateBody } from '../middleware/validate.middleware';
 import { isCancelOrder, isOrderFormBody, isTakeToDeliverBody } from '../validators/order.validator';
 
@@ -12,6 +12,7 @@ router.post("/orderForm", requireAuth, validateBody(isOrderFormBody), OrderForm)
 router.get("/activeOrders", requireAuth, ActiveOrders);
 router.post("/cancelOrder", requireAuth, validateBody(isCancelOrder), CancelOrder);
 router.get("/getLiveOrders", requireAuth, getLiveOrder);
+router.get("/getAllOrders", requireAuth, getAllOrders);
 router.post("/takeToDeliver", requireAuth, validateBody(isTakeToDeliverBody), takeToDeliver);
 
 export default router;

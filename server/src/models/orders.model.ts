@@ -127,4 +127,17 @@ export const OrderModel = {
         return rowsCancel;
     },
 
+    async getAllOrders() {
+        const [rowsOrders] = await db.execute(`
+            SELECT 
+            users.name, orderItemID, orderDate, foodName, (price * quantity) as fullPrice, quantity, status
+            FROM order_items
+        INNER JOIN orders ON order_items.orderID = orders.orderID
+        INNER JOIN fastfood ON order_items.foodID = fastfood.foodID
+        INNER JOIN users ON orders.customerID = users.userID
+        ORDER BY orders.orderDate DESC;
+            `);
+        return rowsOrders;
+    }
+
 }

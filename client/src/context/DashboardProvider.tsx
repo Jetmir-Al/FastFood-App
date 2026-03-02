@@ -6,7 +6,7 @@ interface IDashboardProvider {
 }
 
 
-export const AuthProvider = ({ children }: IDashboardProvider) => {
+export const DashboardProvider = ({ children }: IDashboardProvider) => {
     const [display, setDisplay] = useState<string>("orders");
 
 

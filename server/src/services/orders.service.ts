@@ -33,5 +33,9 @@ export const OrderService = {
 
     async cancelOrder(orderID: number) {
         return await OrderModel.CancelOrder(orderID);
+    },
+
+    async AllOrders() {
+        return await OrderModel.getAllOrders();
     }
 }
