@@ -17,7 +17,8 @@ export const UserModel = {
     async getDeliveryMen(): Promise<IUser[] | null> {
         const [rowsDeliveryMan] = await db.execute<IUser[] & RowDataPacket[]>(
             `
-        SELECT * FROM users WHERE role = 'delivery';
+        SELECT userID, name, email, phone, role, createdAt
+        FROM users WHERE role = 'delivery';
         `
         );
         return rowsDeliveryMan ?? null;
@@ -40,7 +41,7 @@ export const UserModel = {
         FROM
         users
         WHERE
-        role != '';
+        role != 'admin';
         `);
         return users ?? null;
     },

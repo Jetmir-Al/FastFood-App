@@ -1,14 +1,19 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHamburger, faUserGear } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faHamburger, faUserGear } from "@fortawesome/free-solid-svg-icons";
 import Button from "../ui/Button";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useAuthHook } from "../../hooks/useAuthHook";
+import { useDashboardHook } from "../../hooks/useDashboardHook";
+import { Activity, useState } from "react";
 
 const NavBar = () => {
     const { user, authenticated } = useAuthHook();
+    const { displayFunc } = useDashboardHook();
+    const [dropDown, setDropDown] = useState<boolean>(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <div className='navbar-container'>
@@ -39,8 +44,54 @@ const NavBar = () => {
                 }
                 {
                     user?.role === "admin" &&
-                    <li>
-                        <Link to="/dashboard_panel">Dashboard</Link>
+                    <li className="dashboardList">
+                        <Button
+                            className=""
+                            type="button"
+                            onClick={() => setDropDown(d => !d)}
+                        >
+                            Dashboard <FontAwesomeIcon icon={faCaretDown} />
+                        </Button>
+                        <Activity mode={dropDown ? "visible" : "hidden"}>
+                            <div className="dashboardOption-container" >
+                                <Button
+                                    className="dashboardOption"
+                                    type="button"
+                                    onClick={() => {
+                                        if (location.pathname !== "/dashboard_panel") {
+                                            navigate("/dashboard_panel");
+                                        }
+                                        displayFunc('orders');
+                                        setDropDown(false);
+                                    }}>
+                                    Orders
+                                </Button>
+                                <Button
+                                    className="dashboardOption"
+                                    type="button"
+                                    onClick={() => {
+                                        if (location.pathname !== "/dashboard_panel") {
+                                            navigate("/dashboard_panel");
+                                        }
+                                        displayFunc('delivery');
+                                        setDropDown(false);
+                                    }}>
+                                    Deliveries
+                                </Button>
+                                <Button
+                                    className="dashboardOption"
+                                    type="button"
+                                    onClick={() => {
+                                        if (location.pathname !== "/dashboard_panel") {
+                                            navigate("/dashboard_panel");
+                                        }
+                                        displayFunc('users');
+                                        setDropDown(false);
+                                    }}>
+                                    Users
+                                </Button>
+                            </div>
+                        </Activity>
                     </li>
                 }
             </ul>

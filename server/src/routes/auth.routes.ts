@@ -1,6 +1,6 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth.middleware';
-import { Login, signUp, getAllUsers, deleteUser, DeleteAccount, updateUser, UpdatePsw, status, logout } from '../controllers/auth.controller';
+import { Login, signUp, getAllUsers, deleteUser, DeleteAccount, updateUser, UpdatePsw, status, logout, getAllDeliveryMen } from '../controllers/auth.controller';
 import { validateBody } from '../middleware/validate.middleware';
 import { isLoginBody, isDeleteUser, isSignUpBody, isUpdPsw, isUpdateUser } from '../validators/auth.validator';
 // left to add validate for body
@@ -16,6 +16,6 @@ router.put("/updateUser", requireAuth, validateBody(isUpdateUser), updateUser);
 router.put("/updatePsw", requireAuth, validateBody(isUpdPsw), UpdatePsw);
 router.get("/status", requireAuth, status);
 router.post("/logout", requireAuth, logout);
-
+router.get("/getAllDeliveryMen", requireAuth, getAllDeliveryMen);
 
 export default router;

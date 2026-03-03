@@ -3,6 +3,7 @@ import { DeliveryService } from "../services/delivery.service";
 import { HttpError } from "../http/http.error";
 import { IDeleteDelivery, IMarkAsDelivered, IUpdDelivery } from "../types/Delivery";
 import { verifyToken } from "../utils/jwt";
+import { UserService } from "../services/user.service";
 
 
 
@@ -48,6 +49,17 @@ export const getDeliveryHistory = async (req: Request, res: Response) => {
 
 export const getAllDelivery = async (req: Request, res: Response) => {
     try {
+        const token = req.cookies.access_token;
+        if (!token) {
+            return res.status(404).json({ message: "Cookie not found" });
+        }
+        const payload = verifyToken(token);
+        const user = await UserService.status(payload.userID);
+
+        if (user?.role !== 'admin') {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
         const deliveries = await DeliveryService.getAllDeliveries();
         res.status(200).json(deliveries);
 

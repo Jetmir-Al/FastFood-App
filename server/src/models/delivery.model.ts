@@ -31,16 +31,14 @@ export const DeliveryModal = {
     async allDeliveries() {
         const [rowsDeliverys] = await db.execute(`
             SELECT 
-        deliveryID,
+        delivery.deliveryID as deliveryID,
         deliveryManID,
         deliveryMen.name as deliveryMan,
         orders.orderID as orderID,
         customers.name as customer,
         address,
-        DATE_FORMAT(orderDate, '%d/%m/%Y') AS orderDate,
-        DATE_FORMAT(orderDate, '%h:%i %p') AS orderTime,
-        UPPER(status) AS status,
-        delivered,
+        orderDate,
+        status,
         foodName,
         quantity,
         price * quantity AS fullPrice

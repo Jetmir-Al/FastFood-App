@@ -46,14 +46,39 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .navbar-left li {
     margin: 10px;
 }
 
-.navbar-left li a {
+.navbar-left li a,
+.navbar-left li button {
     color: var(--title-color);
+}
+
+.dashboardList {
+    position: relative;
+    transition: scale 1s ease;
+}
+
+.dashboardOption-container {
+    position: absolute;
+    top: 52px;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--boxShadow);
+    left: -10px;
+    transition: 1s;
+}
+
+.dashboardOption {
+    background-color: var(--container-color);
+    width: 100%;
+}
+
+.dashboardOption:hover {
+    background-color: var(--border-color);
 }
 
 

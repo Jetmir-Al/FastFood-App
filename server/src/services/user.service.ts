@@ -23,7 +23,6 @@ export const UserService = {
         if (!user) {
             throw new UnauthorizedError("Invalid credentials");
         }
-        // console.log(user);
         const isMatch = await bcrypt.compare(psw, user.passwordHash);
 
         if (!isMatch) {
@@ -40,7 +39,8 @@ export const UserService = {
     },
 
     async deliveryMen() {
-        return await UserModel.getDeliveryMen();
+        const res = await UserModel.getDeliveryMen();
+        return res;
     },
 
     async status(userID: number) {

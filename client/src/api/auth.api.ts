@@ -42,3 +42,8 @@ export const logout = async () => {
     const res = await api.post("/auth/logout", {}, { withCredentials: true });
     return res.data;
 }
+
+export const getAllDeliveryMen = async () => {
+    const res = await api.get("/auth/getAllDeliveryMen", { withCredentials: true });
+    return res.data;
+}
