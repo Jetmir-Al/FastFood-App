@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 import { useEffect, useState } from "react";
 import { type IDashboardUsers } from "../../types/userTypes";
 import Error from "../../utils/Error";
-import { getAllDeliveryMen } from "../../api/auth.api";
+import { deleteUser, getAllDeliveryMen } from "../../api/auth.api";
 import Loading from "../../utils/Loading";
 import NoInfo from "../../utils/NoInfo";
 
@@ -27,6 +27,21 @@ const UsersDashboard = () => {
 
         allDeliveryMenFunc();
     }, []);
+
+    const deleteUserFunc = async (userID: number) => {
+        try {
+            const del = await deleteUser(userID);
+            if (del.message === "Deleted Succesfully!") {
+                const res = await getAllDeliveryMen();
+                setUsers(res);
+            }
+        } catch {
+            return <Error
+                title="Problem deleting the user"
+                details={"Try again later, until the issue is fixed"}
+                onRetry={() => { }} />
+        }
+    }
 
     return (
         <div className="table-wrapper">
@@ -66,7 +81,9 @@ const UsersDashboard = () => {
                                             <Button
                                                 type="button"
                                                 className="delete-btn"
-                                                onClick={() => { }}
+                                                onClick={async () => {
+                                                    await deleteUserFunc(u.userID);
+                                                }}
                                             >
                                                 Delete
                                             </Button>

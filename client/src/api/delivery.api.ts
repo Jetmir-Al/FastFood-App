@@ -23,3 +23,8 @@ export const updateAsDelivered = async (deliveryID: number, orderID: number) => 
     const res = await api.put("/delivery/markAsDelivered", { deliveryID, orderID }, { withCredentials: true });
     return res.data;
 }
+
+export const deleteDelivery = async (deliveryID: number) => {
+    const res = await api.post("/delivery/deleteDelivery", { deliveryID }, { withCredentials: true });
+    return res.data;
+}

@@ -24,13 +24,14 @@ export const UserModel = {
         return rowsDeliveryMan ?? null;
     },
 
+    // problem with sql syntax will fix next time
     async deleteUser(userID: number) {
-        const res = await db.execute(`
+        await db.execute(`
         DELETE FROM users WHERE userID = ?;
         `, [userID]
         );
 
-        if (res) return "Deleted"
+        return { message: "Deleted Successfully!" };
     },
 
     //left to send specific info

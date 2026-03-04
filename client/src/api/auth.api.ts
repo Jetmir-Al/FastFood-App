@@ -47,3 +47,8 @@ export const getAllDeliveryMen = async () => {
     const res = await api.get("/auth/getAllDeliveryMen", { withCredentials: true });
     return res.data;
 }
+
+export const deleteUser = async (userID: number) => {
+    const res = await api.post("/auth/deleteUser", { userID }, { withCredentials: true });
+    return res.data;
+}

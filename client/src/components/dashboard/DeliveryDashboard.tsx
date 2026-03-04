@@ -4,7 +4,7 @@ import DashboardHeader from "./DashboardHeader";
 import Loading from "../../utils/Loading";
 import type { IDeliveryDashboard } from "../../types/deliveryTypes";
 import Error from "../../utils/Error";
-import { getAllDeliveries } from "../../api/delivery.api";
+import { deleteDelivery, getAllDeliveries } from "../../api/delivery.api";
 import NoInfo from "../../utils/NoInfo";
 
 
@@ -18,7 +18,6 @@ const DeliveryDashboard = () => {
                 const res = await getAllDeliveries();
                 setDelivery(res);
                 setIsLoading(false);
-                console.log(res);
             } catch {
                 return <Error
                     title="Problem getting deliveries"
@@ -30,6 +29,21 @@ const DeliveryDashboard = () => {
 
         getAllDeliveryFunc();
     }, []);
+
+    const deleteDeliveryFunc = async (deliveryID: number) => {
+        try {
+            const del = await deleteDelivery(deliveryID);
+            if (del.message === "Deleted Successfully!") {
+                const res = await getAllDeliveries();
+                setDelivery(res);
+            }
+        } catch {
+            return <Error
+                title="Problem deleting the user"
+                details={"Try again later, until the issue is fixed"}
+                onRetry={() => { }} />
+        }
+    }
 
     return (
         <div className="table-wrapper">
@@ -72,9 +86,17 @@ const DeliveryDashboard = () => {
                                             <Button
                                                 type="button"
                                                 className="delete-btn"
-                                                onClick={() => { }}
+                                                onClick={async () => {
+                                                    await deleteDeliveryFunc(d.deliveryID);
+                                                }}
                                             >
                                                 Delete
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                className="update-btn"
+                                                onClick={() => { }}>
+                                                Update
                                             </Button>
                                         </td>
                                     </tr>

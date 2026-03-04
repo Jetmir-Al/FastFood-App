@@ -1,6 +1,5 @@
-import { ResultSetHeader, RowDataPacket } from "mysql2";
+import { ResultSetHeader } from "mysql2";
 import { db } from "../config/db";
-import { IInsertOrder } from "../types/Order";
 
 export const OrderModel = {
     async top3Orders() {

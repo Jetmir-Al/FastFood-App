@@ -60,7 +60,7 @@ export const UserService = {
     async delUser(userID: number) {
         const delUser = await UserModel.deleteUser(userID);
 
-        if (!delUser) {
+        if (delUser.message !== "Deleted Successfully!") {
             throw new UnauthorizedError("Invalid credentials");
         }
     },

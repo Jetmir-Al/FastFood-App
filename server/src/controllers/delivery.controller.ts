@@ -74,7 +74,7 @@ export const deleteDelivery = async (req: Request, res: Response) => {
         const { deliveryID }: IDeleteDelivery = req.body;
 
         await DeliveryService.delDelivery(deliveryID);
-
+        res.status(200).json({ message: "Deleted Successfully!" });
     } catch (error: any) {
         if (error instanceof HttpError) {
             return res.status(error.statusCode).json({ message: error.message });
