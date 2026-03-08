@@ -6,11 +6,18 @@ import type { IDeliveryDashboard } from "../../types/deliveryTypes";
 import Error from "../../utils/Error";
 import { deleteDelivery, getAllDeliveries } from "../../api/delivery.api";
 import NoInfo from "../../utils/NoInfo";
+import UpdateDelivery from "../forms/UpdateDelivery";
 
 
 const DeliveryDashboard = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [delivery, setDelivery] = useState<IDeliveryDashboard[] | null>(null);
+    const [deliveryForm, setDeliveryForm] = useState<boolean>(false);
+    const [deliveryID, setDeliveryID] = useState<number>(0);
+    const [customer, setCustomer] = useState<string>("");
+    const [address, setAddress] = useState<string>("");
+    const [deliveryMan, setDeliveryMan] = useState<string>("");
+
 
     useEffect(() => {
         const getAllDeliveryFunc = async () => {
@@ -43,6 +50,14 @@ const DeliveryDashboard = () => {
                 details={"Try again later, until the issue is fixed"}
                 onRetry={() => { }} />
         }
+    }
+    if (deliveryForm) {
+        return <UpdateDelivery
+            deliveryID={deliveryID}
+            customer={customer}
+            address={address}
+            deliveryMan={deliveryMan}
+        />
     }
 
     return (
@@ -92,12 +107,21 @@ const DeliveryDashboard = () => {
                                             >
                                                 Delete
                                             </Button>
-                                            <Button
-                                                type="button"
-                                                className="update-btn"
-                                                onClick={() => { }}>
-                                                Update
-                                            </Button>
+                                            {
+                                                d.status !== 'delivered' &&
+                                                <Button
+                                                    type="button"
+                                                    className="update-btn"
+                                                    onClick={() => {
+                                                        setDeliveryID(d.deliveryID);
+                                                        setCustomer(d.customer);
+                                                        setAddress(d.address);
+                                                        setDeliveryMan(d.deliveryMan);
+                                                        setDeliveryForm(true);
+                                                    }}>
+                                                    Update
+                                                </Button>
+                                            }
                                         </td>
                                     </tr>
                                 ))

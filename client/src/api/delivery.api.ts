@@ -28,3 +28,8 @@ export const deleteDelivery = async (deliveryID: number) => {
     const res = await api.post("/delivery/deleteDelivery", { deliveryID }, { withCredentials: true });
     return res.data;
 }
+
+export const changeDeliveryMan = async (userID: number, deliveryID: number) => {
+    const res = await api.put("/delivery/changeDeliveryMan", { userID, deliveryID }, { withCredentials: true });
+    return res.data;
+}

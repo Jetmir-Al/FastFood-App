@@ -1,0 +1,19 @@
+.updateForm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.updateForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--boxShadow);
+    max-width: 500px;
+}
+
+.deliveryInfo {}
+
+.updateForm {}

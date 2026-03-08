@@ -19,7 +19,7 @@ export const UpdateDelivery = async (req: Request, res: Response) => {
 
         await DeliveryService.updateDel(deliveryID, payload.userID, address, orderID, status);
 
-        res.status(200).json({ message: "Updated Successfully" });
+        res.status(200).json({ message: "Updated Successfully!" });
 
     } catch (error: any) {
         if (error instanceof HttpError) {
@@ -29,6 +29,22 @@ export const UpdateDelivery = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const ChangeDeliveryMan = async (req: Request, res: Response) => {
+    try {
+        const { userID, deliveryID }: IUpdDelivery = req.body;
+
+        await DeliveryService.updateDeliveryMan(userID, deliveryID);
+
+        res.status(200).json({ message: "Updated Successfully!" });
+    } catch (error: any) {
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
+
+        res.status(500).json({ message: error.message });
+    }
+}
 
 
 export const getDeliveryHistory = async (req: Request, res: Response) => {

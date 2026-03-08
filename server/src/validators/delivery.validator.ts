@@ -1,4 +1,4 @@
-import { IDeleteDelivery, IUpdDelivery } from "../types/Delivery";
+import { IChangeDeliveryMan, IDeleteDelivery, IUpdDelivery } from "../types/Delivery";
 
 
 
@@ -32,5 +32,15 @@ export const isMarkAsDeliveredBody = (body: any): body is IDeleteDelivery => {
         body.deliveryID !== 0 &&
         typeof body.orderID === "number" &&
         body.orderID !== 0
+    )
+}
+
+export const isChangeDeliveryMan = (body: any): body is IChangeDeliveryMan => {
+    return (
+        typeof body === "object" &&
+        typeof body.userID === "number" &&
+        body.userID !== 0 &&
+        typeof body.deliveryID === "number" &&
+        body.deliveryID !== 0
     )
 }

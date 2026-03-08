@@ -11,3 +11,10 @@ export interface IDeliveryDashboard {
     quantity: number;
     fullPrice: number;
 }
+
+export interface IUpdateDelivery {
+    customer: string;
+    deliveryID: number;
+    deliveryMan: string;
+    address: string;
+}

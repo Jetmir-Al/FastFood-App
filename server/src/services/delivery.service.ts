@@ -20,6 +20,13 @@ export const DeliveryService = {
         }
     },
 
+    async updateDeliveryMan(userID: number, deliveryID: number) {
+        const res = await DeliveryModal.updateDelivery(userID, deliveryID);
+        if (res.message !== "Update Successfully!") {
+            throw new BadRequestError("Invalid request");
+        }
+    },
+
     async delivHisto(userID: number) {
         return await DeliveryModal.DeliveryHistory(userID);
     },
