@@ -40,3 +40,9 @@ export const getAllOrders = async () => {
     const res = await api.get("/order/getAllOrders", { withCredentials: true });
     return res.data;
 }
+
+
+export const deleteOrder = async (orderID: number) => {
+    const res = await api.post("/order/deleteOrder", { orderID }, { withCredentials: true });
+    return res.data;
+}

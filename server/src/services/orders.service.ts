@@ -1,3 +1,4 @@
+import { BadRequestError } from "../http/http.error";
 import { OrderModel } from "../models/orders.model";
 
 
@@ -33,6 +34,13 @@ export const OrderService = {
 
     async cancelOrder(orderID: number) {
         return await OrderModel.CancelOrder(orderID);
+    },
+
+    async DeleteOrder(orderID: number) {
+        const res = await OrderModel.deleteOrder(orderID);
+        if (res.message !== "Deleted Successfully!") {
+            throw new BadRequestError("Invalid request");
+        }
     },
 
     async AllOrders() {

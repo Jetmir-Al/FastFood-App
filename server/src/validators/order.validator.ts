@@ -1,4 +1,4 @@
-import { IOrderForm, ITakeToDeliver } from "../types/Order";
+import { IDeleteOrder, IOrderForm, ITakeToDeliver } from "../types/Order";
 
 
 export const isOrderFormBody = (body: any): body is IOrderForm => {
@@ -14,6 +14,14 @@ export const isOrderFormBody = (body: any): body is IOrderForm => {
 }
 
 export const isTakeToDeliverBody = (body: any): body is ITakeToDeliver => {
+    return (
+        typeof body === "object" &&
+        typeof body.orderID === "number" &&
+        body.orderID !== 0
+    );
+}
+
+export const isDeleteOrder = (body: any): body is IDeleteOrder => {
     return (
         typeof body === "object" &&
         typeof body.orderID === "number" &&

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { HttpError } from "../http/http.error";
 import { verifyToken } from "../utils/jwt";
 import { OrderService } from "../services/orders.service";
-import { IOrderForm, ITakeToDeliver } from "../types/Order";
+import { IDeleteOrder, IOrderForm, ITakeToDeliver } from "../types/Order";
 import { UserService } from "../services/user.service";
 
 
@@ -123,6 +123,22 @@ export const getAllOrders = async (req: Request, res: Response) => {
         res.status(200).json(active);
 
     } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const deleteOrder = async (req: Request, res: Response) => {
+    try {
+        const { orderID }: IDeleteOrder = req.body;
+
+        await OrderService.DeleteOrder(orderID);
+        res.status(200).json({ message: "Deleted Successfully!" });
+
+    } catch (error: any) {
+        if (error instanceof HttpError) {
+            return res.status(error.statusCode).json({ message: error.message });
+        }
+
         res.status(500).json({ message: error.message });
     }
 }

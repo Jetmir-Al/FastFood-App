@@ -137,6 +137,14 @@ export const OrderModel = {
         ORDER BY orders.orderDate DESC;
             `);
         return rowsOrders;
+    },
+
+    async deleteOrder(orderID: number) {
+        await db.execute(`
+            DELETE FROM orders WHERE orderID = ?;
+            `, [orderID]);
+
+        return { message: "Deleted Successfully!" };
     }
 
 }

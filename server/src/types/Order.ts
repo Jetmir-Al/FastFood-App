@@ -12,3 +12,7 @@ export interface IOrderForm {
 export interface ITakeToDeliver {
     orderID: number;
 }
+
+export interface IDeleteOrder {
+    orderID: number;
+}

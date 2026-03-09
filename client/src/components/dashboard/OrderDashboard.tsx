@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 import DashboardHeader from "./DashboardHeader";
 import type { IOrderDashboardTypes } from "../../types/orderTypes";
 import Error from "../../utils/Error";
-import { getAllOrders } from "../../api/order.api";
+import { deleteOrder, getAllOrders } from "../../api/order.api";
 import NoInfo from "../../utils/NoInfo";
 import Loading from "../../utils/Loading";
 
@@ -28,6 +28,22 @@ const OrderDashboard = () => {
         allOrders();
     }, []);
 
+
+    const DeleteOrderFunc = async (orderID: number) => {
+        try {
+            const res = await deleteOrder(orderID);
+            if (res.message === "Deleted Successfully!") {
+                const orders = await getAllOrders();
+                setOrders(orders);
+            }
+        } catch {
+            return <Error
+                title="Problem getting Orders"
+                details={"Will fix soon"}
+                onRetry={() => { }}
+            />
+        }
+    }
 
     return (
         <div className="table-wrapper">
@@ -70,7 +86,9 @@ const OrderDashboard = () => {
                                             <Button
                                                 type="button"
                                                 className="delete-btn"
-                                                onClick={() => { }}
+                                                onClick={async () => {
+
+                                                }}
                                             >
                                                 Delete
                                             </Button>

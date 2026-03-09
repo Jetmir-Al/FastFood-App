@@ -1,8 +1,8 @@
 import express from 'express';
 import { requireAuth } from '../middleware/auth.middleware';
-import { OrderForm, orderHistory, topOrders, ActiveOrders, CancelOrder, getLiveOrder, takeToDeliver, getAllOrders } from '../controllers/order.controller';
+import { OrderForm, orderHistory, topOrders, ActiveOrders, CancelOrder, getLiveOrder, takeToDeliver, getAllOrders, deleteOrder } from '../controllers/order.controller';
 import { validateBody } from '../middleware/validate.middleware';
-import { isCancelOrder, isOrderFormBody, isTakeToDeliverBody } from '../validators/order.validator';
+import { isCancelOrder, isDeleteOrder, isOrderFormBody, isTakeToDeliverBody } from '../validators/order.validator';
 
 const router = express.Router();
 
@@ -14,5 +14,6 @@ router.post("/cancelOrder", requireAuth, validateBody(isCancelOrder), CancelOrde
 router.get("/getLiveOrders", requireAuth, getLiveOrder);
 router.get("/getAllOrders", requireAuth, getAllOrders);
 router.post("/takeToDeliver", requireAuth, validateBody(isTakeToDeliverBody), takeToDeliver);
+router.post("/deleteOrder", requireAuth, validateBody(isDeleteOrder), deleteOrder);
 
 export default router;
