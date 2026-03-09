@@ -17,4 +17,5 @@ export interface IUpdateDelivery {
     deliveryID: number;
     deliveryMan: string;
     address: string;
+    refetchFunc: () => Promise<void>;
 }

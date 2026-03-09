@@ -37,6 +37,21 @@ const DeliveryDashboard = () => {
         getAllDeliveryFunc();
     }, []);
 
+    const refetchDeliveries = async () => {
+        try {
+            const res = await getAllDeliveries();
+            setDelivery(res);
+            setIsLoading(false);
+            setDeliveryForm(false);
+        } catch {
+            return <Error
+                title="Problem getting deliveries"
+                details={"Will fix this issue soon!"}
+                onRetry={() => { }}
+            />
+        }
+    }
+
     const deleteDeliveryFunc = async (deliveryID: number) => {
         try {
             const del = await deleteDelivery(deliveryID);
@@ -57,6 +72,7 @@ const DeliveryDashboard = () => {
             customer={customer}
             address={address}
             deliveryMan={deliveryMan}
+            refetchFunc={async () => { await refetchDeliveries() }}
         />
     }
 

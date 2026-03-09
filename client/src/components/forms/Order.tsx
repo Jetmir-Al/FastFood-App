@@ -59,6 +59,12 @@ const Order = () => {
                             Your order has been submited!
                         </h3>
                     }
+                    {
+                        submitErr &&
+                        <h3>
+                            Problem taking your order!
+                        </h3>
+                    }
                     <label className='orderLbl'>
                         Your address here: <br />
                         <input type="text"

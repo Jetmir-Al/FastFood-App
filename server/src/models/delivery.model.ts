@@ -2,7 +2,7 @@ import { db } from "../config/db";
 
 
 export const DeliveryModal = {
-    async updateDelivery(deliveryID: number, userID: number) {
+    async updateDelivery(userID: number, deliveryID: number) {
         await db.execute(`
                 UPDATE delivery SET deliveryManID = ?
                 WHERE deliveryID = ?;
