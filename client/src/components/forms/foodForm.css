@@ -1,0 +1,84 @@
+.foodForm-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+}
+
+.addFoodItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: var(--boxShadow);
+    background-color: var(--border-color);
+}
+
+.foodItemHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    box-shadow: var(--boxShadow);
+    border-radius: 12px 12px 0 0;
+}
+
+.addFoodItem h3 {
+    align-self: center;
+}
+
+.addBtn {
+    padding: 0.3rem 1.5rem;
+    background-color: var(--white-color);
+    color: var(--color30);
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+    transition: 1s;
+}
+
+.addBtn:hover {
+    background-color: var(--first-color-hover);
+    color: var(--white-color);
+}
+
+.addFoodItem h2 {
+    text-align: center;
+    align-self: center;
+}
+
+.addFoodItem input {
+    padding: 10px;
+    width: 100%;
+    font: var(--p);
+    border: none;
+    border-bottom: 3px dashed var(--first-color);
+    outline: none;
+}
+
+.addFoodItem input:focus {
+    border-bottom: 3px solid var(--first-color-hover);
+}
+
+.addFoodItem :nth-child(4) {
+    border-bottom: 3px solid var(--first-color);
+
+}
+
+.addFoodBtns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.inputFile {
+    width: 100%;
+    background-color: var(--white-color);
+}

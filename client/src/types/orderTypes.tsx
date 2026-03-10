@@ -8,4 +8,5 @@ export interface IOrderDashboardTypes {
     quantity: number;
     status: string;
     orderItemID: number;
+    orderID: number;
 }

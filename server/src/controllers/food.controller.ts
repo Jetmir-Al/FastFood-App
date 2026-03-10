@@ -36,11 +36,12 @@ export const UploadImgToDB = async (req: Request, res: Response) => {
 export const addNewFoodItem = async (req: Request, res: Response) => {
     try {
         const foodImg = req.file?.filename;
-        const { foodName, foodDesc, price }: IFoodInsert = req.body;
+        const { foodName, foodDesc }: IFoodInsert = req.body;
+        const price = Number(req.body.price);
 
         await FoodService.addNewFood(foodName, foodDesc, price, foodImg);
 
-        res.status(200).json({ message: "Insert Succesfully" });
+        res.status(200).json({ message: "Insert Succesfully!" });
 
     } catch (error: any) {
         if (error instanceof HttpError) {

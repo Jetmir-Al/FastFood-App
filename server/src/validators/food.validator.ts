@@ -9,10 +9,8 @@ export const isAddFoodItemBody = (body: any): body is IFoodInsert => {
         body.foodName !== "" &&
         typeof body.foodDesc === "string" &&
         body.foodDesc !== "" &&
-        typeof body.price === "number" &&
-        body.price !== 0 &&
-        typeof body.foodImg === "string" &&
-        body.foodImg !== ""
+        typeof body.price === "string" &&
+        body.price !== ""
     );
 }
 

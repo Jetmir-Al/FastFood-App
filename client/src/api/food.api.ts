@@ -18,4 +18,12 @@ export const getTopFoods = async () => {
 };
 
 
-
+export const addFoodItem = async (foodName: string, foodDesc: string, price: string, imgFile: File) => {
+    const formData = new FormData();
+    formData.append("foodName", foodName);
+    formData.append("foodDesc", foodDesc);
+    formData.append("price", price);
+    formData.append("foodImg", imgFile);
+    const res = await api.post("/food/addNewFood", formData, { withCredentials: true });
+    return res.data;
+}

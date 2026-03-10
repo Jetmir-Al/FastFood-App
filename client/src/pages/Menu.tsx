@@ -4,13 +4,17 @@ import { type IMenu } from "../types/foodTypes";
 import { getFoodItems, getImageUrl } from "../api/food.api";
 import NoInfo from "../utils/NoInfo";
 import Loading from "../utils/Loading";
+import { useAuthHook } from "../hooks/useAuthHook";
+import Button from "../components/ui/Button";
+import FoodForm from "../components/forms/FoodForm";
 
 
 
 const Menu = () => {
-
+    const { user } = useAuthHook();
     const [foodInfo, setFoodInfo] = useState<IMenu[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [foodForm, setFoodForm] = useState<boolean>(false);
 
     useEffect(() => {
         const foodList = async () => {
@@ -27,6 +31,8 @@ const Menu = () => {
     }, []);
 
     if (loading) return <Loading />
+    if (foodForm) return <FoodForm
+        setDisplay={() => setFoodForm(false)} />
 
     return (
         <div className="foodList-conatiner">
@@ -45,6 +51,14 @@ const Menu = () => {
                         ))
                 }
             </div>
+            {
+                user?.role === "admin" &&
+                <Button className="addFoodItem-btn"
+                    type="button"
+                    onClick={() => setFoodForm(true)}>
+                    ADD
+                </Button>
+            }
 
         </div >
     )

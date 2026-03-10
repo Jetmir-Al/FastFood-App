@@ -10,6 +10,6 @@ const router = express.Router();
 router.get("/getFoodItems", getFoodItems);
 router.get("/getTopFoods", getTopFoods);
 router.put("/updateFoodImg", requireAuth, validateBody(isUpdateFoodImg), updateFoodImge);
-router.post("/addNewFood", requireAuth, validateBody(isAddFoodItemBody), upload.single("foodImg"), addNewFoodItem);
+router.post("/addNewFood", requireAuth, upload.single("foodImg"), validateBody(isAddFoodItemBody), addNewFoodItem);
 
 export default router;

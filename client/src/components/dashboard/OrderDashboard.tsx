@@ -87,7 +87,7 @@ const OrderDashboard = () => {
                                                 type="button"
                                                 className="delete-btn"
                                                 onClick={async () => {
-
+                                                    await DeleteOrderFunc(o.orderID);
                                                 }}
                                             >
                                                 Delete

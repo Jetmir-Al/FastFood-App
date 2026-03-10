@@ -129,7 +129,7 @@ export const OrderModel = {
     async getAllOrders() {
         const [rowsOrders] = await db.execute(`
             SELECT 
-            users.name, orderItemID, orderDate, foodName, (price * quantity) as fullPrice, quantity, status
+            users.name, orderItemID, orderDate, foodName, (price * quantity) as fullPrice, quantity, status, orders.orderID
             FROM order_items
         INNER JOIN orders ON order_items.orderID = orders.orderID
         INNER JOIN fastfood ON order_items.foodID = fastfood.foodID
