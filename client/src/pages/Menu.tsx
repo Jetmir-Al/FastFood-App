@@ -19,7 +19,6 @@ const Menu = () => {
     useEffect(() => {
         const foodList = async () => {
             try {
-                //    
                 const food = await getFoodItems();
                 setFoodInfo(food);
                 setLoading(false);
@@ -32,7 +31,12 @@ const Menu = () => {
 
     if (loading) return <Loading />
     if (foodForm) return <FoodForm
-        setDisplay={() => setFoodForm(false)} />
+        setDisplay={() => setFoodForm(false)}
+        reFetchFunc={async () => {
+            const food = await getFoodItems();
+            setFoodInfo(food);
+        }}
+    />
 
     return (
         <div className="foodList-conatiner">

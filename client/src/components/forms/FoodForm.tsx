@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 import "./foodForm.css";
 import { addFoodItem } from "../../api/food.api";
 
-const FoodForm = ({ setDisplay }: { setDisplay: () => void }) => {
+const FoodForm = ({ setDisplay, reFetchFunc }: { setDisplay: () => void; reFetchFunc: () => void }) => {
     const [foodName, setFoodName] = useState<string>("");
     const [foodDesc, setFoodDesc] = useState<string>("");
     const [price, setPrice] = useState<string>("");
@@ -25,6 +25,7 @@ const FoodForm = ({ setDisplay }: { setDisplay: () => void }) => {
 
                 const res = await addFoodItem(foodName, foodDesc, price, imgFile);
                 if (res.message === "Insert Succesfully!") {
+                    reFetchFunc();
                     setDisplay();
                 }
             }
