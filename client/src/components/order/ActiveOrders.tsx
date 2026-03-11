@@ -14,7 +14,8 @@ const ActiveOrders = () => {
         const getOrders = async () => {
             try {
                 const res = await getActiveOrders();
-                setActiveOrder(res);
+                console.log(res);
+                setActiveOrder(res.live);
             } catch {
                 return <Error
                     title='Problem getting Active Orders'

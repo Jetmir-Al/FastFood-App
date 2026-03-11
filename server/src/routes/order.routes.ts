@@ -11,7 +11,7 @@ router.get("/topOrders", requireAuth, topOrders);
 router.post("/orderForm", requireAuth, validateBody(isOrderFormBody), OrderForm);
 router.get("/activeOrders", requireAuth, ActiveOrders);
 router.post("/cancelOrder", requireAuth, validateBody(isCancelOrder), CancelOrder);
-router.get("/getLiveOrders", requireAuth, getLiveOrder);
+router.get("/getLiveOrders", getLiveOrder);
 router.get("/getAllOrders", requireAuth, getAllOrders);
 router.post("/takeToDeliver", requireAuth, validateBody(isTakeToDeliverBody), takeToDeliver);
 router.post("/deleteOrder", requireAuth, validateBody(isDeleteOrder), deleteOrder);

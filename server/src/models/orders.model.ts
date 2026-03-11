@@ -71,7 +71,8 @@ export const OrderModel = {
         );
     },
 
-    async LiveOrders() {
+    async LiveOrders(limit: number, offsetValue: number) {
+        console.log(typeof offsetValue, typeof limit, offsetValue, limit)
         const [rowsLiveOrders] = await db.execute(
             `
         SELECT 
@@ -81,9 +82,9 @@ export const OrderModel = {
         FROM order_items
         INNER JOIN orders ON order_items.orderID = orders.orderID
         INNER JOIN fastfood ON order_items.foodID = fastfood.foodID
-        WHERE status LIKE 'pending'
-        ORDER BY orders.orderDate DESC
-        `
+        WHERE status = 'pending'
+        ORDER BY orders.orderID DESC LIMIT ?, ?
+        `, [offsetValue, limit]
         );
         return rowsLiveOrders;
     },

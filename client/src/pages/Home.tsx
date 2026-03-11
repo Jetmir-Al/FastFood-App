@@ -44,12 +44,18 @@ const Home = () => {
                                 onClick={() => navigate("/order")}>
                                 Order Now!
                             </Button>
-                            :
-                            <Button className=""
-                                type="button"
-                                onClick={() => navigate("/delivery")}>
-                                Deliver Now!
-                            </Button>
+                            : user?.role === "delivery" ?
+                                <Button className=""
+                                    type="button"
+                                    onClick={() => navigate("/delivery")}>
+                                    Deliver Now!
+                                </Button>
+                                :
+                                <Button className=""
+                                    type="button"
+                                    onClick={() => navigate("/dashboard_panel")}>
+                                    Manage Now!
+                                </Button>
                         :
                         <Button className=""
                             type="button"

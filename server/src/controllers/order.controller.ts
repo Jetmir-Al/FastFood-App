@@ -53,9 +53,14 @@ export const OrderForm = async (req: Request, res: Response) => {
 
 export const getLiveOrder = async (req: Request, res: Response) => {
     try {
-
-        const live = await OrderService.getLiveOrders();
-        res.status(200).json(live);
+        const page = Math.max(Number(req.query.page) || 1, 1);
+        const limit = 10;
+        const offsetValue = (page - 1) * limit;
+        const live = await OrderService.getLiveOrders(limit, offsetValue);
+        res.status(200).json({
+            page,
+            live
+        });
 
     } catch (error: any) {
         res.status(500).json({ message: error.message });

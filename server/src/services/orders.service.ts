@@ -20,8 +20,8 @@ export const OrderService = {
 
     },
 
-    async getLiveOrders() {
-        return await OrderModel.LiveOrders();
+    async getLiveOrders(limit: number, offsetValue: number) {
+        return await OrderModel.LiveOrders(limit, offsetValue);
     },
 
     async deliverOrder(orderID: number, deliveryManID: number) {
