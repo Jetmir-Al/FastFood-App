@@ -56,10 +56,14 @@ export const getLiveOrder = async (req: Request, res: Response) => {
         const page = Math.max(Number(req.query.page) || 1, 1);
         const limit = 10;
         const offsetValue = (page - 1) * limit;
-        const live = await OrderService.getLiveOrders(limit, offsetValue);
+        const [orders, totalRows] = await OrderService.getLiveOrders(limit, offsetValue);
+        const totalPages = Math.round(totalRows / limit);
         res.status(200).json({
             page,
-            live
+            live: orders,
+            totalPages,
+            hasNext: page < totalPages,
+            hasPrev: page > 1
         });
 
     } catch (error: any) {

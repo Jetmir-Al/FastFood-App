@@ -5,16 +5,20 @@ import Error from "../../utils/Error";
 import { getLiveOrder, takeToDeliver } from "../../api/order.api";
 import Button from "../ui/Button";
 import { useNavigate } from "react-router";
+import type { ILiveOrderTypes } from "../../types/orderTypes";
+import Pagination from "../ui/Pagination";
 
 const Delivery = () => {
-    const [liveOrders, setLiveOrders] = useState<ICardProps[] | null>(null);
+    const [liveOrders, setLiveOrders] = useState<ILiveOrderTypes | null>(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const GetLiveOrders = async () => {
             try {
                 const res = await getLiveOrder();
-                setLiveOrders(res);
+                if (res) {
+                    setLiveOrders(res);
+                }
             } catch {
                 return <Error
                     title="Problem getting live orders!"
@@ -58,7 +62,6 @@ const Delivery = () => {
                 <table className='liveOrders'>
                     <thead>
                         <tr>
-
                             <th>Food Name</th>
                             <th>Address</th>
                             <th>Time</th>
@@ -69,9 +72,9 @@ const Delivery = () => {
                     </thead>
                     <tbody>
                         {
-                            liveOrders?.length === 0 ? <tr style={{ textAlign: 'center' }}>
+                            liveOrders?.live.length === 0 ? <tr style={{ textAlign: 'center' }}>
                                 <td colSpan={6}>No deliveries as of this moment!</td>
-                            </tr> : liveOrders?.map((res: ICardProps) => (
+                            </tr> : liveOrders?.live.map((res: ICardProps) => (
                                 <tr className='liveOrder-row'
                                     key={res.orderID}>
 
@@ -90,6 +93,15 @@ const Delivery = () => {
                         }
                     </tbody>
                 </table>
+                {
+                    liveOrders &&
+                    liveOrders.totalPages > 1 &&
+                    <Pagination
+                        hasPrev={liveOrders?.hasPrev}
+                        hasNext={liveOrders?.hasNext}
+                        totalPages={liveOrders.totalPages}
+                    />
+                }
             </div>
         </div>
     );

@@ -72,8 +72,7 @@ export const OrderModel = {
     },
 
     async LiveOrders(limit: number, offsetValue: number) {
-        console.log(typeof offsetValue, typeof limit, offsetValue, limit)
-        const [rowsLiveOrders] = await db.execute(
+        const [rowsLiveOrders] = await db.query(
             `
         SELECT 
         orderDate, orders.orderID, orderItemID, foodName, foodDesc, quantity, 
@@ -86,7 +85,15 @@ export const OrderModel = {
         ORDER BY orders.orderID DESC LIMIT ?, ?
         `, [offsetValue, limit]
         );
-        return rowsLiveOrders;
+
+        const [countRows]: any = await db.execute(
+            `SELECT COUNT(*) as total 
+            FROM orders
+            WHERE status = 'pending';`
+        );
+        const totalRows = countRows[0].total;
+
+        return [rowsLiveOrders, totalRows];
     },
 
     async takeToDeliver(orderID: number, deliveryManID: number) {

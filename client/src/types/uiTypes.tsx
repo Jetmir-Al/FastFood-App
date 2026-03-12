@@ -14,6 +14,12 @@ export interface IDashboardHeader {
     tHeader6: string;
 }
 
+export interface IPagintaionProps {
+    hasPrev: boolean;
+    hasNext: boolean;
+    totalPages: number;
+}
+
 export interface ICardProps {
     address: string;
     orderID: number;

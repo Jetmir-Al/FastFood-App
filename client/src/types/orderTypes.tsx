@@ -1,3 +1,4 @@
+import type { ICardProps } from "./uiTypes";
 
 
 export interface IOrderDashboardTypes {
@@ -9,4 +10,12 @@ export interface IOrderDashboardTypes {
     status: string;
     orderItemID: number;
     orderID: number;
+}
+
+export interface ILiveOrderTypes {
+    page: number;
+    live: ICardProps[];
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
 }

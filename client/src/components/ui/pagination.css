@@ -1,0 +1,30 @@
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    background-color: var(--first-color);
+    padding: 0.5rem;
+}
+
+.pageBtns-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pageBtns-container button {
+    background-color: var(--border-color);
+    padding: 0.5rem;
+    color: var(--first-color);
+    border-radius: 3px;
+}
+
+.arrowBtns {
+    border-radius: 50%;
+    background-color: var(--border-color);
+    padding: 0.5rem;
+    color: var(--first-color);
+}
