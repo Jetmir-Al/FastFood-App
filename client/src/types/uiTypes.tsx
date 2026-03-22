@@ -16,7 +16,10 @@ export interface IDashboardHeader {
 
 export interface IPagintaionProps {
     hasPrev: boolean;
+    hasPrevFunc: () => void;
     hasNext: boolean;
+    hasNextFunc: () => void;
+    pageNumber: (index: number) => void;
     totalPages: number;
 }
 

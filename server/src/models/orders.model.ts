@@ -134,17 +134,23 @@ export const OrderModel = {
         return rowsCancel;
     },
 
-    async getAllOrders() {
-        const [rowsOrders] = await db.execute(`
+    async getAllOrders(limit: number, offsetValue: number) {
+        const [rowsOrders] = await db.query(`
             SELECT 
             users.name, orderItemID, orderDate, foodName, (price * quantity) as fullPrice, quantity, status, orders.orderID
             FROM order_items
         INNER JOIN orders ON order_items.orderID = orders.orderID
         INNER JOIN fastfood ON order_items.foodID = fastfood.foodID
         INNER JOIN users ON orders.customerID = users.userID
-        ORDER BY orders.orderDate DESC;
-            `);
-        return rowsOrders;
+         ORDER BY orders.orderID DESC LIMIT ?, ?
+            `, [offsetValue, limit]);
+
+        const [countRows]: any = await db.execute(
+            `SELECT COUNT(*) as total 
+            FROM orders;`
+        );
+        const totalRows = countRows[0].total;
+        return [rowsOrders, totalRows];
     },
 
     async deleteOrder(orderID: number) {

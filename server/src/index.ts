@@ -35,6 +35,6 @@ app.use("/api/delivery", DeliveryRoutes);
 app.use("/api/food", FoodRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
 
 

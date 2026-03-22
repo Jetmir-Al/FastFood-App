@@ -4,7 +4,7 @@ import "./pagination.css";
 import Button from "./Button";
 import type { IPagintaionProps } from "../../types/uiTypes";
 
-const Pagination = ({ hasPrev, hasNext, totalPages }: IPagintaionProps) => {
+const Pagination = ({ hasPrev, hasNext, hasPrevFunc, hasNextFunc, totalPages, pageNumber }: IPagintaionProps) => {
     return (
         <div className='pagination-container'>
             {
@@ -12,7 +12,7 @@ const Pagination = ({ hasPrev, hasNext, totalPages }: IPagintaionProps) => {
                 <Button
                     className="arrowBtns"
                     type="button"
-                    onClick={() => { }}>
+                    onClick={() => hasPrevFunc()}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </Button>
             }
@@ -22,7 +22,7 @@ const Pagination = ({ hasPrev, hasNext, totalPages }: IPagintaionProps) => {
                         <Button
                             className=""
                             type="button"
-                            onClick={() => { }}>
+                            onClick={() => pageNumber(index + 1)}>
                             {index + 1}
                         </Button>
                     ))
@@ -33,7 +33,7 @@ const Pagination = ({ hasPrev, hasNext, totalPages }: IPagintaionProps) => {
                 <Button
                     className="arrowBtns"
                     type="button"
-                    onClick={() => { }}>
+                    onClick={() => hasNextFunc()}>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </Button>
             }

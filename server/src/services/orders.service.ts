@@ -43,7 +43,7 @@ export const OrderService = {
         }
     },
 
-    async AllOrders() {
-        return await OrderModel.getAllOrders();
+    async AllOrders(limit: number, offsetValue: number) {
+        return await OrderModel.getAllOrders(limit, offsetValue);
     }
 }

@@ -127,9 +127,18 @@ export const getAllOrders = async (req: Request, res: Response) => {
         if (user?.role !== 'admin') {
             return res.status(401).json({ message: "Unauthorized" });
         }
-
-        const active = await OrderService.AllOrders();
-        res.status(200).json(active);
+        const page = Math.max(Number(req.query.page) || 1, 1);
+        const limit = 10;
+        const offsetValue = (page - 1) * limit;
+        const [active, totalRows] = await OrderService.AllOrders(limit, offsetValue);
+        const totalPages = Math.round(totalRows / limit);
+        res.status(200).json({
+            page,
+            active: active,
+            totalPages,
+            hasNext: page < totalPages,
+            hasPrev: page > 1
+        });
 
     } catch (error: any) {
         res.status(500).json({ message: error.message });

@@ -12,10 +12,25 @@ export interface IOrderDashboardTypes {
     orderID: number;
 }
 
+export interface IOrderDashboard {
+    page: number;
+    active: IOrderDashboardTypes[];
+    totalPages: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+}
+
 export interface ILiveOrderTypes {
     page: number;
     live: ICardProps[];
     totalPages: number;
     hasNext: boolean;
     hasPrev: boolean;
+}
+
+export interface IOrderParams {
+    params: {
+        page: number | string;
+        totalPages: number | string;
+    }
 }

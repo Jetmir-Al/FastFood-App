@@ -4,18 +4,28 @@ import type { ICardProps } from "../../types/uiTypes";
 import Error from "../../utils/Error";
 import { getLiveOrder, takeToDeliver } from "../../api/order.api";
 import Button from "../ui/Button";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import type { ILiveOrderTypes } from "../../types/orderTypes";
 import Pagination from "../ui/Pagination";
 
 const Delivery = () => {
     const [liveOrders, setLiveOrders] = useState<ILiveOrderTypes | null>(null);
     const navigate = useNavigate();
+    const [params, setParams] = useSearchParams();
+    const page = params.get("page") || 1;
+    const totalPages = params.get("totalPages") || 1;
+
 
     useEffect(() => {
         const GetLiveOrders = async () => {
             try {
-                const res = await getLiveOrder();
+                const res = await getLiveOrder(
+                    {
+                        params: {
+                            page: page,
+                            totalPages: totalPages
+                        }
+                    });
                 if (res) {
                     setLiveOrders(res);
                 }
@@ -28,13 +38,18 @@ const Delivery = () => {
             }
         }
         GetLiveOrders();
-    }, []);
+    }, [page, totalPages]);
 
     const deliverFunc = async (orderID: number) => {
         try {
             const res = await takeToDeliver(orderID);
             if (res.message === "Ready to deliver!") {
-                const res = await getLiveOrder();
+                const res = await getLiveOrder({
+                    params: {
+                        page: page,
+                        totalPages: totalPages
+                    }
+                });
                 setLiveOrders(res);
             }
         } catch {
@@ -45,6 +60,7 @@ const Delivery = () => {
             />
         }
     }
+
 
     return (
         <div className="liveOrders-container">
@@ -99,7 +115,22 @@ const Delivery = () => {
                     <Pagination
                         hasPrev={liveOrders?.hasPrev}
                         hasNext={liveOrders?.hasNext}
+                        hasPrevFunc={
+                            () => setParams({
+                                page: String(Number(page) - 1),
+                                totalPages: String(liveOrders.totalPages)
+                            })
+                        }
+                        hasNextFunc={
+                            () => setParams({
+                                page: String(Number(page) + 1),
+                                totalPages: String(liveOrders.totalPages)
+                            })}
                         totalPages={liveOrders.totalPages}
+                        pageNumber={(index: number) => setParams({
+                            page: String(index),
+                            totalPages: String(liveOrders.totalPages)
+                        })}
                     />
                 }
             </div>

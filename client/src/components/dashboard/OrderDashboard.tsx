@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import DashboardHeader from "./DashboardHeader";
-import type { IOrderDashboardTypes } from "../../types/orderTypes";
+import type { IOrderDashboard, IOrderDashboardTypes } from "../../types/orderTypes";
 import Error from "../../utils/Error";
 import { deleteOrder, getAllOrders } from "../../api/order.api";
 import NoInfo from "../../utils/NoInfo";
 import Loading from "../../utils/Loading";
+import { useSearchParams } from "react-router";
+import Pagination from "../ui/Pagination";
 
 const OrderDashboard = () => {
-    const [orders, setOrders] = useState<IOrderDashboardTypes[] | null>(null);
+    const [orders, setOrders] = useState<IOrderDashboard | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [params, setParams] = useSearchParams();
+    const page = params.get("page") || 1;
+    const totalPages = params.get("totalPages") || 1;
 
     useEffect(() => {
         const allOrders = async () => {
             try {
-                const res = await getAllOrders();
-                setOrders(res);
-                setIsLoading(false);
+                const res = await getAllOrders({
+                    params: {
+                        page: page,
+                        totalPages: totalPages
+                    }
+                });
+                if (res) {
+                    setOrders(res);
+                    setIsLoading(false);
+                }
             } catch {
                 return <Error
                     title="Problem getting Orders"
@@ -26,14 +38,19 @@ const OrderDashboard = () => {
             }
         }
         allOrders();
-    }, []);
+    }, [page, totalPages]);
 
 
     const DeleteOrderFunc = async (orderID: number) => {
         try {
             const res = await deleteOrder(orderID);
             if (res.message === "Deleted Successfully!") {
-                const orders = await getAllOrders();
+                const orders = await getAllOrders({
+                    params: {
+                        page: page,
+                        totalPages: totalPages
+                    }
+                });
                 setOrders(orders);
             }
         } catch {
@@ -64,12 +81,12 @@ const OrderDashboard = () => {
                                     <Loading />
                                 </td>
                             </tr> :
-                            orders?.length === 0 ? <tr className="tr-row">
+                            orders?.active.length === 0 ? <tr className="tr-row">
                                 <td>
                                     <NoInfo noInfo="No orders have been made!" />
                                 </td>
                             </tr> :
-                                orders?.map((o: IOrderDashboardTypes) => (
+                                orders?.active.map((o: IOrderDashboardTypes) => (
                                     <tr className="tr-row"
                                         key={o.orderItemID}
                                     >
@@ -98,6 +115,30 @@ const OrderDashboard = () => {
                     }
                 </tbody>
             </table>
+            {
+                orders &&
+                orders.totalPages > 1 &&
+                <Pagination
+                    hasPrev={orders?.hasPrev}
+                    hasNext={orders?.hasNext}
+                    hasPrevFunc={
+                        () => setParams({
+                            page: String(Number(page) - 1),
+                            totalPages: String(orders.totalPages)
+                        })
+                    }
+                    hasNextFunc={
+                        () => setParams({
+                            page: String(Number(page) + 1),
+                            totalPages: String(orders.totalPages)
+                        })}
+                    totalPages={orders.totalPages}
+                    pageNumber={(index: number) => setParams({
+                        page: String(index),
+                        totalPages: String(orders.totalPages)
+                    })}
+                />
+            }
         </div>
     );
 }

@@ -1,3 +1,4 @@
+import type { IOrderParams } from "../types/orderTypes";
 import { api } from "./api"
 
 
@@ -11,8 +12,16 @@ export const getTopOrders = async () => {
     return res.data;
 }
 
-export const getLiveOrder = async () => {
-    const res = await api.get("/order/getLiveOrders", { withCredentials: true });
+export const getLiveOrder = async ({ params }: IOrderParams) => {
+    const res = await api.get("/order/getLiveOrders",
+        {
+            params: {
+                page: params.page,
+                totalPages: params.totalPages
+            },
+            withCredentials: true
+        },
+    );
     return res.data;
 }
 
@@ -36,8 +45,14 @@ export const takeToDeliver = async (orderID: number) => {
     return res.data;
 }
 
-export const getAllOrders = async () => {
-    const res = await api.get("/order/getAllOrders", { withCredentials: true });
+export const getAllOrders = async ({ params }: IOrderParams) => {
+    const res = await api.get("/order/getAllOrders", {
+        params: {
+            page: params.page,
+            totalPages: params.totalPages
+        },
+        withCredentials: true
+    });
     return res.data;
 }
 
