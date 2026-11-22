@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router';
 import './App.css';
 import NavBar from './components/layout/NavBar';
 import NotFound from './pages/NotFound';
@@ -19,7 +19,9 @@ function App() {
   const { user } = useAuthHook();
   return (
     <Router>
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <NavBar />
+      <main id="main-content" className="app-main" tabIndex={-1}>
       <Routes>
 
         <Route path='*' element={<NotFound />} />
@@ -64,6 +66,14 @@ function App() {
         </Route>
 
       </Routes>
+      </main>
+      <footer className="site-footer">
+        <div className="footer-inner">
+          <div><Link to="/" className="footer-brand">Fast<span>Food.</span></Link><p>Big flavour. Good moments.</p></div>
+          <nav aria-label="Footer"><Link to="/menu">Menu</Link><Link to="/about">About</Link></nav>
+          <p>Made for your next craving.</p>
+        </div>
+      </footer>
     </Router>
   )
 }
