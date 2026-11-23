@@ -1,170 +1,23 @@
-.loading-container {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 40vh;
-}
-
-.loadingIcon {
-    margin-top: 5rem;
-    width: 100%;
-    font: var(--h2);
-    animation: spin 3s ease-in-out infinite;
-}
-
-.errorPage {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 300px;
-}
-
-
-.error-Container {
-    border: 2px solid red;
-    background: #fff5f5;
-    color: #742a2a;
-    padding: 1rem;
-    border-radius: 5px;
-    width: 60%;
-    max-width: 500px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    font-family: 'Segoe UI, Roboto, Helvetica, Arial, sans-serif';
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.error {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.errorIcon {
-    margin-right: 8px;
-    font-size: 1.5rem;
-    color: red;
-}
-
-.errorInfo {
-    flex: 1;
-}
-
-.errorTitle {
-    font: var(--h4);
-}
-
-.errorMessage {
-    margin-top: 4px;
-    font-size: 14px;
-}
-
-.error-btns {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 1rem;
-}
-
-.errorCloseBtn {
-    cursor: pointer;
-    background-color: transparent;
-    border: 1px solid brown;
-    border-radius: 4px;
-    color: brown;
-    padding: 0.5rem 0.7rem;
-}
-
-
-.error-btns button {
-    border: none;
-    border-bottom: 1px solid orangered;
-    background: transparent;
-    color: orangered;
-    cursor: pointer;
-    padding: 0;
-    font: var(--h5);
-}
-
-.errorDetailsText {
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    padding: 10px;
-    margin-top: 8px;
-    border-radius: 4px;
-    overflow-x: auto;
-    font: var(--p);
-    white-space: pre-wrap;
-}
-
-.errorDetails button {
-    border: 2px solid var(--red);
-    background-color: transparent;
-    border-radius: 4px;
-    color: var(--text-color);
-}
-
-.noInfo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-    background-color: var(--container-color);
-    border: 3px solid var(--border-color);
-    padding: 2.5rem;
-    border-radius: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.noInfoIcon {
-    font: var(--h2);
-    color: var(--first-color);
-
-}
-
-.alertBox-continer {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--container-color);
-    border: 3px solid var(--first-color);
-    border-radius: 10px;
-    box-shadow: var(--boxShadow);
-    padding: 0.5rem 1rem;
-    gap: 1rem;
-    top: 35%;
-    right: 35%;
-    backdrop-filter: blur(8px);
-}
-
-.alertHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 0.5rem;
-}
-
-
-.xBtn {
-    align-self: flex-end;
-    border: none;
-    background-color: transparent;
-    padding: 0.7rem 1rem;
-    color: var(--first-color);
-}
-
-
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
+.loading-Container { display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 240px; width: 100%; gap: 1rem; padding: 2rem 1rem; text-align: center; }
+.loading-food { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; background: #fce8d3; color: var(--first-color); font-size: 2rem; animation: food-pulse 1.5s ease-in-out infinite; }
+.loading-Container p { font-size: .85rem; }
+.loading-progress { width: 130px; height: 5px; accent-color: var(--first-color); }
+.error-Container { margin: 1.5rem auto; width: min(600px, 100%); display: grid; gap: 1rem; padding: 1.5rem; border: 1px solid #e4b9ae; border-radius: 14px; background: #fff3ee; color: #91372b; text-align: left; }
+.error { display: flex; align-items: center; gap: .8rem; }
+.errorIcon { color: var(--first-color); font-size: 1.5rem; }
+.errorTitle { font-size: 1rem; font-weight: 750; line-height: 1.4; color: #91372b; }
+.error-btns { display: flex; flex-wrap: wrap; gap: .75rem; }
+.errorDetails > button { border: none; background: transparent; color: #91372b; text-decoration: underline; font-size: .85rem; min-height: 44px; }
+.errorDetailsText { background: white; border: 1px solid #edd3c8; border-radius: 8px; padding: .8rem; font-size: .85rem; white-space: pre-wrap; }
+.error-btns .button { min-height: 42px; font-size: .8rem; }
+.error-btns .errorCloseBtn { background: transparent; border-color: #d9a99c; color: #91372b; }
+.error-btns .errorCloseBtn:hover { background: #ffe6dc; }
+.noInfo-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem; background: #fcf8f1; border: 1px dashed #d7c7b7; padding: 2.5rem 1.5rem; border-radius: 16px; text-align: center; }
+.empty-state-icon { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%; background: #f3e6d3; color: #a17744; font-size: 1.5rem; }
+.noInfo-container p { font-size: .9rem; }
+.alertBox-continer { position: fixed; right: 1.5rem; bottom: 1.5rem; max-width: min(420px, calc(100% - 3rem)); z-index: 50; display: grid; gap: .5rem; padding: 1.25rem; background: white; border: 1px solid var(--border-color); border-left: 4px solid var(--first-color); border-radius: 14px; box-shadow: var(--boxShadow-strong); }
+.alertHeader { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.alertHeader h3 { font-size: 1rem; }
+.alertBox-continer p { font-size: .85rem; }
+.button.xBtn { background: transparent; color: var(--title-color); min-width: 44px; min-height: 44px; padding: .5rem; }
+@keyframes food-pulse { 50% { scale: .92; } }

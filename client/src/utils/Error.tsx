@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import Button from '../components/ui/Button';
+import './utils.css';
 
 interface IError {
     title: string,
@@ -22,7 +23,7 @@ export default function Error({ title, details, onRetry }: IError) {
 
 
                 <div className="errorInfo">
-                    <div className="errorTitle">{title}</div>
+                    <p className="errorTitle" role="alert">{title}</p>
                 </div>
             </div>
 
