@@ -22,11 +22,13 @@ export const FoodModel = {
 
 
     async addFoodItem(foodName: string, foodDesc: string, price: number, foodImg: string | undefined) {
+        const foodImgValue = foodImg ? foodImg : "";
+
         await db.execute(`
         INSERT INTO fastfood (foodName, foodDesc, price, foodImg)
         VALUES  
         (?, ?, ?, ?)
-        `, [foodName, foodDesc, price, foodImg]);
+        `, [foodName, foodDesc, price, foodImgValue]);
 
         return { message: "added food item!" };
     },

@@ -1,4 +1,5 @@
 import { getActiveOrders, getLiveOrder, orderForm } from "../api/order.api"
+import type { IOrderParams } from "../types/orderTypes"
 import Error from "../utils/Error"
 
 
@@ -17,15 +18,15 @@ export const useGetActiveOrders = () => {
     }
 }
 export const useGetLiveOrders = () => {
-    return async function () {
+    return async function (params: IOrderParams) {
         try {
-            const res = await getLiveOrder();
+            const res = await getLiveOrder(params);
             return res;
         } catch {
             return <Error
                 title="Error getting live orders"
                 details={null}
-                onRetry={async () => await getActiveOrders()}
+                onRetry={async () => await getLiveOrder(params)}
             />
         }
     }
@@ -33,11 +34,6 @@ export const useGetLiveOrders = () => {
 
 export const useOrderForm = () => {
     return async function (address: string, foodID: number, quantity: number) {
-        try {
-            const res = await orderForm(address, foodID, quantity);
-            return res;
-        } catch {
-            // 
-        }
+        return await orderForm(address, foodID, quantity);
     }
 }
