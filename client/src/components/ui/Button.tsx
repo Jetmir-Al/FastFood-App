@@ -1,17 +1,8 @@
 import "./button.css";
 import type { IButtonProps } from "../../types/uiTypes";
 
-
-function Button({ children, onClick, type, className }: IButtonProps) {
-    return (
-        <button
-            type={type}
-            onClick={onClick}
-            className={className}
-        >
-            {children}
-        </button>
-    );
+function Button({ children, type = "button", className = "", ...props }: IButtonProps) {
+    return <button type={type} className={`button ${className}`} {...props}>{children}</button>;
 }
 
 export default Button;

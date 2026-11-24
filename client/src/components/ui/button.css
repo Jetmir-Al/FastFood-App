@@ -1,33 +1,14 @@
-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    font: var(--h5);
-    padding: 0.5rem 1rem;
+.button {
+  display: inline-flex; justify-content: center; align-items: center; gap: .6rem;
+  min-height: 46px; padding: .7rem 1.2rem; border: 1px solid transparent; border-radius: 10px;
+  background: var(--first-color); color: white; font-weight: 750; line-height: 1.4;
+  transition: background-color .18s, translate .18s; text-align: center;
 }
-
-.navBtn {
-    color: var(--first-color);
-    background-color: transparent;
-    border: none;
-}
-
-
-
-.deleteBtn {
-    background-color: var(--red);
-    border: none;
-    border-radius: 5px;
-    color: var(--white-color);
-}
-
-.deleteBtn:hover {
-    background-color: var(--redHover);
-}
-
-.btn {
-    border: none;
-    border-radius: 5px;
-    color: var(--first-color);
-    background-color: var(--border-color);
-}
+.button:hover:not(:disabled) { background: var(--first-color-hover); }
+.button:active:not(:disabled) { translate: 0 1px; }
+.button.secondary { background: white; color: var(--title-color); border-color: #c8b7a7; }
+.button.secondary:hover:not(:disabled) { background: var(--container-color); }
+.button.danger, .button.delete-btn { background: #fff0ed; color: var(--red); border-color: #edc7bd; }
+.button.danger:hover:not(:disabled), .button.delete-btn:hover:not(:disabled) { background: #fce0d9; }
+.button.text-button { background: transparent; color: var(--first-color); padding-inline: .25rem; }
+.button.text-button:hover:not(:disabled) { background: transparent; text-decoration: underline; }

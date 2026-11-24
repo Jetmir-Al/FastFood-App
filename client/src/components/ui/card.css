@@ -1,56 +1,18 @@
-.activeOrders {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-.card-container {
-    display: flex;
-    gap: 1rem;
-    border-radius: 20px;
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--accent-color);
-    box-shadow: var(--boxShadow);
-    background-color: var(--border-color);
-    flex-basis: 550px;
-}
-
-.foodImg {
-    max-width: 200px;
-    object-fit: contain;
-    background-color: var(--white-color);
-    border-radius: 20px;
-}
-
-.cardInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-}
-
-.foodInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.foodInfo h5 {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.ordersBtn {
-    width: 100%;
-    background-color: var(--first-color);
-    border-radius: 5px;
-    color: var(--white-color);
-}
-
-span {
-    color: var(--text-color);
-}
+.activeOrders { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); align-items: start; gap: 1.5rem; width: 100%; }
+.card-container { container-type: inline-size; display: flex; gap: 1.25rem; padding: 1.5rem; background: white; border: 1px solid var(--border-color); border-radius: 18px; min-width: 0; }
+.order-card-image { flex: 0 0 100px; align-self: start; background: #f6eddf; border-radius: 12px; padding: .5rem; }
+.foodImg { width: 100%; aspect-ratio: 1; object-fit: contain; mix-blend-mode: multiply; }
+.cardInfo { flex: 1; min-width: 0; }
+.order-card-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; align-items: center; margin-bottom: .8rem; }
+.order-card-heading .eyebrow { margin: 0; font-size: .65rem; letter-spacing: .08em; }
+.order-food-description { font-size: .8rem; margin-top: .5rem; }
+.foodInfo { display: grid; gap: .6rem; margin-top: 1rem; font-size: .8rem; }
+.foodInfo > div { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+.foodInfo dt { flex-shrink: 0; }
+.foodInfo dd { color: var(--title-color); text-align: right; }
+.foodInfo address { font-style: normal; }
+.foodInfo .order-card-price { font-size: 1.1rem; font-weight: 800; color: var(--first-color); }
+.cardInfo .ordersBtn { width: 100%; margin-top: 1.25rem; font-size: .8rem; }
+.cardInfo .inline-alert { font-size: .8rem; margin-top: 1rem; }
+@container (max-width: 370px) { .order-card-heading { flex-direction: column; align-items: start; } .foodInfo > div { flex-direction: column; gap: .1rem; } .foodInfo dd { text-align: left; } }
+@media (max-width: 600px) { .card-container { padding: 1rem; gap: .8rem; } .order-card-image { flex-basis: 76px; } }

@@ -1,0 +1,5 @@
+.confirm-dialog { margin: auto; width: min(480px, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); overflow: auto; padding: 2rem; border: 1px solid var(--border-color); border-radius: 20px; box-shadow: var(--boxShadow-strong); background: white; color: var(--text-color); }
+.confirm-dialog::backdrop { background: rgb(40 34 31 / 55%); }
+.confirm-dialog > p:not(.eyebrow) { margin-top: 1rem; font-size: .9rem; }
+.confirm-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: .75rem; margin-top: 1.75rem; }
+@media (max-width: 480px) { .confirm-dialog { padding: 1.5rem; } .confirm-actions .button { flex: 1; } }
