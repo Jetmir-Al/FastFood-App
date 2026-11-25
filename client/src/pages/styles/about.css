@@ -1,52 +1,14 @@
-.about-container {
-    width: 100%;
-    min-height: 80vh;
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.about-section {
-    width: 50%;
-    max-width: 95%;
-    padding: 1rem 2rem;
-    background: var(--white-color);
-    border-radius: 0 0 18px 18px;
-    box-shadow: var(--boxShadow-strong);
-    border: 2px solid var(--border-color);
-    position: relative;
-}
-
-.aboutHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 50%;
-    padding: 1.5rem 2rem;
-    background-color: var(--first-color);
-    border-radius: 12px 12px 0 0;
-    box-shadow: var(--boxShadow-strong);
-}
-
-.section {
-    width: 100%;
-}
-
-@media screen and (max-width: 1024px) {
-
-    .about-section,
-    .aboutHeader {
-        width: 80%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-
-    .about-section,
-    .aboutHeader {
-        width: 90%;
-    }
-
-}
+.about-intro { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; margin-bottom: 4rem; }
+.about-intro h1 span { color: var(--first-color); }
+.about-intro p:not(.eyebrow) { max-width: 500px; margin-block: 1.5rem; }
+.about-art { background: #f7ca66; border-radius: 30px; position: relative; aspect-ratio: 1.1; display: grid; place-items: center; overflow: hidden; }
+.about-art .food-artwork { width: 110%; }
+.about-art > span { position: absolute; bottom: 1.5rem; color: #70420f; font-size: .75rem; font-weight: 850; letter-spacing: .15em; }
+.about-value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.about-value-grid article { background: white; border: 1px solid var(--border-color); border-radius: 18px; padding: 2rem; }
+.about-icon { display: grid; place-items: center; width: 54px; height: 54px; background: #fff0e3; color: var(--first-color); border-radius: 14px; margin-bottom: 1.5rem; font-size: 1.5rem; }
+.about-value-grid p { font-size: .9rem; margin-top: .75rem; }
+.about-closing { margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 3rem; text-align: center; }
+.about-closing .text-link { margin-top: 1rem; }
+@media (max-width: 850px) { .about-intro { gap: 1.5rem; } .about-value-grid article { padding: 1.5rem; } }
+@media (max-width: 640px) { .about-intro, .about-value-grid { grid-template-columns: 1fr; } .about-intro { margin-bottom: 2.5rem; } .about-art { width: min(440px, 100%); margin: auto; } .about-closing { margin-top: 2.5rem; } }

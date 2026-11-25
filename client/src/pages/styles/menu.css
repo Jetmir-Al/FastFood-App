@@ -1,91 +1,26 @@
-.foodList-conatiner {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 0px;
-    margin-top: 40px;
-}
-
-.foodList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    width: 65%;
-    padding: 10px;
-}
-
-.foodListTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-
-
-.food {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: var(--first-color);
-    box-shadow: var(--boxShadow);
-    color: var(--white-color);
-}
-
-.food img {
-    width: 150px;
-    height: 130px;
-    background-color: var(--container-color);
-    border-radius: 10px;
-    object-fit: cover;
-}
-
-.food h4 {
-    color: var(--white-color);
-}
-
-.addFoodItem-btn {
-    padding: 0.5rem 2rem;
-    background-color: var(--first-color);
-    margin: 10px;
-    color: var(--white-color);
-    border-radius: 3px;
-}
-
-.addFoodItem-btn:hover {
-    background-color: var(--first-color-hover);
-}
-
-
-@media screen and (max-width: 1024px) {
-    .foodList {
-        width: 80%;
-    }
-
-    .addFoodItem,
-    .foodItemHeader {
-        width: 75%;
-    }
-
-}
-
-@media screen and (max-width: 600px) {
-    .foodList {
-        width: 95%;
-    }
-
-    .addFoodItem,
-    .foodItemHeader {
-        width: 90%;
-    }
-
-
-}
+.menu-heading-note { font-size: .8rem; font-weight: 800; color: #856015; border: 1px dashed #d4ad61; padding: .7rem 1rem; border-radius: 100px; rotate: -4deg; }
+.menu-toolbar { display: flex; gap: 1.5rem; align-items: center; justify-content: space-between; padding: 1.1rem; background: white; border: 1px solid var(--border-color); border-radius: 14px; margin-bottom: 1.75rem; }
+.menu-search { position: relative; width: min(470px, 100%); }
+.menu-search > svg { position: absolute; top: 50%; left: 1rem; translate: 0 -50%; pointer-events: none; color: var(--text-color); }
+.menu-search input { padding-left: 2.75rem !important; background: #fcf8f3 !important; border-color: var(--border-color) !important; }
+.menu-sort { display: flex; align-items: center; gap: .8rem; }
+.menu-sort label { white-space: nowrap; font-size: .8rem; color: var(--text-color); }
+.menu-sort select { width: auto; font-size: .85rem; }
+.menu-result-count { font-size: .85rem; margin-bottom: 1rem; }
+.foodList { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 1.5rem; }
+.food { display: flex; flex-direction: column; background: white; border: 1px solid var(--border-color); border-radius: 18px; overflow: hidden; transition: box-shadow .2s, translate .2s; }
+.food:hover { box-shadow: var(--shadow); translate: 0 -3px; }
+.menu-food-image { background: #f6eddf; padding: 1.5rem; }
+.menu-food-image img { aspect-ratio: 1.5; width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.menu-food-info { padding: 1.4rem; display: flex; flex-direction: column; flex: 1; }
+.menu-food-info h2 { font-size: 1.25rem; letter-spacing: -.025em; }
+.menu-food-info > p { font-size: .85rem; margin-top: .65rem; flex: 1; }
+.menu-food-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 1.5rem; gap: .75rem; }
+.menu-food-bottom strong { font-size: 1.25rem; color: var(--first-color); }
+.menu-order-link { display: flex; align-items: center; justify-content: center; gap: .6rem; color: var(--first-color); background: #fff0e9; padding: .6rem .9rem; min-height: 44px; border-radius: 9px; font-size: .85rem; font-weight: 750; }
+.menu-order-link:hover { background: var(--first-color); color: white; }
+.menu-empty { display: grid; justify-items: center; gap: 1rem; }
+.menu-note { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: 2rem 0 0; margin-top: 2rem; border-top: 1px solid var(--border-color); }
+.menu-note span { font-size: .7rem; font-weight: 850; letter-spacing: .12em; color: var(--first-color); }
+.menu-note p { font-size: .85rem; }
+@media (max-width: 640px) { .menu-toolbar { flex-direction: column; align-items: stretch; gap: .75rem; } .menu-sort { justify-content: space-between; } .menu-sort select { flex: 1; } .menu-note { flex-direction: column; gap: .5rem; text-align: center; } }

@@ -1,109 +1,299 @@
 .dashboard-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 2rem 0;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: min(76rem, calc(100% - 2rem));
+    min-width: 0;
+    margin-inline: auto;
+    padding-block: 2.5rem 4rem;
+    color: var(--title-color, #28221f);
+    container-type: inline-size;
 }
 
+.dashboard-heading h1 {
+    margin-block: 0.35rem 0.65rem;
+    font-size: clamp(1.85rem, 1.35rem + 2vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
 
-.table-wrapper {
-    width: 80%;
+.dashboard-heading > p:last-child,
+.dashboard-panel-heading p {
+    margin: 0;
+    color: var(--text-color, #65584e);
+    line-height: 1.6;
+}
+
+.dashboard-container .operations-eyebrow {
+    margin: 0;
+    color: var(--first-color, #c83d2d);
+    font-size: 0.75rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.dashboard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-self: flex-start;
+    padding: 0.35rem;
+    border: 1px solid var(--border-color, #eadfd2);
+    border-radius: var(--radius, 1rem);
+    background: var(--white-color, #fff);
+}
+
+.dashboard-tabs button {
+    min-height: 44px;
+    padding: 0.65rem 1.4rem;
+    border: 1px solid transparent;
+    border-radius: 0.7rem;
+    background: transparent;
+    color: var(--title-color, #28221f);
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.dashboard-tabs button:hover {
+    background: var(--body-color, #fff8ed);
+}
+
+.dashboard-tabs button[aria-pressed="true"] {
+    background: var(--first-color, #c83d2d);
+    color: var(--white-color, #fff);
+}
+
+.dashboard-panel {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--border-color, #eadfd2);
+    border-radius: var(--radius, 1rem);
+    background: var(--white-color, #fff);
+    box-shadow: var(--shadow, 0 8px 24px #28221f08);
+}
+
+.dashboard-panel-heading {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color, #eadfd2);
+}
+
+.dashboard-panel-heading h2 {
+    margin: 0 0 0.35rem;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.dashboard-container .table-wrapper {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
-    background-color: var(--container-color);
-    border-radius: 1rem;
-    box-shadow: var(--boxShadow);
+    overscroll-behavior-x: contain;
+    border-radius: 0 0 var(--radius, 1rem) var(--radius, 1rem);
+    background: var(--white-color, #fff);
 }
 
 .dashboardTable {
     width: 100%;
+    min-width: 56rem;
     border-collapse: collapse;
-    background-color: var(--container-color);
+    color: var(--title-color, #28221f);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.dashboardTable caption {
+    padding: 0.8rem 1.5rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-color, #65584e);
 }
 
 .dashboardTable th,
 .dashboardTable td {
-    text-align: center;
-    padding: 1rem;
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--border-color, #eadfd2);
+    text-align: left;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
 }
 
-.dashboardTable th {
-    background-color: var(--first-color);
-    color: var(--white-color);
-    font: var(--h3);
+.dashboardTable thead th {
+    background: var(--body-color, #fff8ed);
+    color: var(--title-color, #28221f);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
 }
 
-.t-row:nth-child(even) {
-    background-color: var(--border-color);
+.dashboardTable tbody th {
+    font-weight: 650;
 }
 
-.t-row:hover {
-    background-color: var(--white-color);
+.dashboardTable tbody tr:last-child > * {
+    border-bottom: 0;
 }
 
-.tableBtns {
-    display: flex;
-    justify-content: center;
+.dashboardTable tbody tr:hover {
+    background: #fffaf3;
+}
+
+.dashboardTable .tableBtns {
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+.dashboardTable .tableBtns button + button {
+    margin-inline-start: 0.45rem;
+}
+
+.dashboard-container .delete-btn,
+.dashboard-container .update-btn,
+.dashboard-container .operations-retry {
+    display: inline-flex;
     align-items: center;
-    height: 100%;
-    gap: 0.5rem;
-}
-
-.update-btn,
-.delete-btn {
-    padding: 0.5rem 0.7rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 0.6rem;
+    font: inherit;
+    font-weight: 650;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.update-btn {
-    background-color: gold;
-    color: var(--white-color);
+.dashboard-container .delete-btn {
+    border-color: #e9b9b1;
+    background: #fff1ee;
+    color: var(--first-color, #c83d2d);
 }
 
-.update-btn:hover {
-    background-color: yellow;
+.dashboard-container .delete-btn:hover:not(:disabled) {
+    background: #ffe3dc;
 }
 
-.delete-btn {
-    background-color: var(--red);
-    color: var(--white-color);
+.dashboard-container .update-btn {
+    border-color: var(--accent-color, #f6bd41);
+    background: #fff0c8;
+    color: var(--title-color, #28221f);
 }
 
-.delete-btn:hover {
-    background-color: var(--redHover);
+.dashboard-container .update-btn:hover:not(:disabled) {
+    background: var(--accent-color, #f6bd41);
 }
 
-.noInfo-head {
-    width: 100%;
+.dashboard-container .operations-status {
+    display: inline-block;
+    padding: 0.25rem 0.55rem;
+    border: 1px solid #e7d3a7;
+    border-radius: 0.45rem;
+    background: #fff2d4;
+    color: var(--title-color, #28221f);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.025em;
+    line-height: 1.5;
 }
 
-.noInfo-row {
-    width: 100%;
+.dashboardTable .operations-state {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    color: var(--text-color, #65584e);
 }
 
+.dashboard-container .operations-state .loadingIcon {
+    width: 1.5rem;
+    margin: 0.5rem;
+}
 
+.dashboard-container .operations-state .noInfo-container {
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+}
 
-@media screen and (max-width: 768px) {
+.dashboard-container .operations-state .error-Container {
+    width: min(100%, 30rem);
+    margin-inline: auto;
+    border: 1px solid #e9b9b1;
+    border-radius: 0.8rem;
+    box-shadow: none;
+}
 
-    .dashboardTable {
-        width: 100%;
+.operations-notice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 1.5rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #e9b9b1;
+    border-radius: 0.75rem;
+    background: #fff1ee;
+    color: #963023;
+    line-height: 1.5;
+}
+
+.operations-notice p {
+    flex: 1 1 18rem;
+    margin: 0;
+}
+
+.dashboard-container .operations-retry {
+    border-color: #e9b9b1;
+    background: var(--white-color, #fff);
+    color: #963023;
+    white-space: nowrap;
+}
+
+.dashboard-container button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.dashboard-container :where(button, select, .table-wrapper):focus-visible {
+    outline: 3px solid var(--first-color, #c83d2d);
+    outline-offset: 3px;
+}
+
+.dashboard-container .table-wrapper:focus-visible {
+    outline-offset: -3px;
+}
+
+@container (max-width: 38rem) {
+    .dashboard-tabs {
+        align-self: stretch;
     }
 
-    .table-wrapper {
-        width: 90%;
+    .dashboard-tabs button {
+        flex: 1;
+        padding-inline: 0.7rem;
     }
 
-    .dashboardTable td {
-        padding: 0.5rem;
-        font-size: 0.9rem;
+    .dashboard-panel-heading {
+        padding: 1.1rem;
     }
 
-    .dashboardTable th {
-        font: var(--h5);
+    .operations-notice {
+        margin-inline: 1rem;
+    }
+}
+
+@media (pointer: coarse) {
+    .dashboard-container .tableBtns button {
+        min-height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-container .loadingIcon {
+        animation: none;
     }
 }

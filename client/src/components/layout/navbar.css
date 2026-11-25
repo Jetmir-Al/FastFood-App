@@ -1,89 +1,34 @@
-/* navbar-container */
-.navbar-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--first-color);
-    color: var(--title-color);
-    height: 10vh;
-    padding: 10px;
-    box-shadow: var(--boxShadow);
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--body-color); border-bottom: 1px solid var(--border-color); }
+.navbar-container { max-width: 1244px; margin: auto; min-height: 88px; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.brand { display: inline-flex; align-items: center; gap: .6rem; flex-shrink: 0; font-size: 1.6rem; color: var(--title-color); font-weight: 900; letter-spacing: -.06em; }
+.brand-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--first-color); color: var(--accent-color); font-size: 1.3rem; }
+.brand-accent { color: var(--first-color); }
+.navbar-left { display: flex; gap: 1.7rem; align-items: center; list-style: none; }
+.navbar-left a, .navbar-left summary { min-height: 44px; display: flex; align-items: center; color: var(--text-color); font-size: .9rem; font-weight: 650; position: relative; }
+.navbar-left a.active, .navbar-left summary.active, .navbar-left a:hover, .navbar-left summary:hover { color: var(--first-color); }
+.navbar-left a.active::after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--first-color); bottom: 0; left: calc(50% - 2.5px); }
+.navbar-right { display: flex; align-items: center; gap: 1.25rem; flex-shrink: 0; }
+.signin-link { color: var(--title-color); font-weight: 700; font-size: .9rem; padding-block: .6rem; }
+.signin-link:hover { color: var(--first-color); }
+.nav-cta { min-height: 44px; font-size: .85rem; padding: .6rem 1rem; }
+.account-link { display: flex; align-items: center; gap: .6rem; border: 1px solid var(--border-color); border-radius: 100px; padding: .65rem 1rem; color: var(--title-color); font-size: .85rem; font-weight: 700; background: white; }
+.account-link:hover { border-color: var(--first-color); color: var(--first-color); }
+.mobile-menu-button { display: none; background: transparent; color: var(--title-color); border: 1px solid var(--border-color); border-radius: 9px; min-height: 44px; min-width: 44px; }
+.dashboardList { position: relative; }
+.dashboardList summary { cursor: pointer; gap: .5rem; }
+.dashboardList summary::after { content: ''; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; }
+.dashboardOption-container { position: absolute; top: calc(100% + .75rem); left: 0; width: 180px; padding: .5rem; border-radius: 12px; background: white; border: 1px solid var(--border-color); box-shadow: var(--shadow); }
+.button.dashboardOption { justify-content: start; width: 100%; background: white; color: var(--title-color); }
+.button.dashboardOption:hover { background: var(--container-color); }
+@media (max-width: 1050px) { .navbar-container { gap: 1rem; padding-inline: 1.5rem; } .navbar-left { gap: 1rem; } .brand { font-size: 1.35rem; } .navbar-right { gap: .75rem; } }
+@media (max-width: 850px) {
+  .navbar-container { min-height: 76px; padding: .8rem 1rem; flex-wrap: wrap; }
+  .mobile-menu-button { display: block; }
+  .primary-navigation { display: none; order: 3; width: 100%; }
+  .primary-navigation.is-open { display: block; padding: .5rem 0; }
+  .navbar-left { flex-wrap: wrap; gap: .5rem 1.5rem; }
+  .navbar-left a.active::after { display: none; }
+  .dashboardOption-container { position: static; margin-top: .5rem; }
+  .account-link span { display: none; }
 }
-
-.navbar-container li,
-button {
-    list-style-type: none;
-    cursor: pointer;
-}
-
-/* navbar-right */
-.navbar-right {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.accountBtn {
-    margin: 5px;
-    border: none;
-    font: var(--p);
-    border-radius: 5px;
-    padding: 0.5rem 1.2rem;
-    background-color: var(--white-color);
-    color: var(--text-color);
-    font-weight: 600;
-    transition: background-color 0.3s;
-}
-
-.accountBtn:hover {
-    background-color: var(--border-color);
-}
-
-
-/* navbar-left */
-.navbar-left {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar-left li {
-    margin: 10px;
-}
-
-.navbar-left li a,
-.navbar-left li button {
-    color: var(--title-color);
-}
-
-.dashboardList {
-    position: relative;
-    transition: scale 1s ease;
-}
-
-.dashboardOption-container {
-    position: absolute;
-    top: 52px;
-    border: 2px solid var(--border-color);
-    box-shadow: var(--boxShadow);
-    left: -10px;
-    transition: 1s;
-}
-
-.dashboardOption {
-    background-color: var(--container-color);
-    width: 100%;
-}
-
-.dashboardOption:hover {
-    background-color: var(--border-color);
-}
-
-
-@media screen and (max-width: 758px) {
-    .accountBtn {
-        padding: 0.4rem 0.6rem;
-    }
-}
+@media (max-width: 390px) { .signin-link { display: none; } .nav-cta { padding-inline: .75rem; } .brand { font-size: 1.25rem; } .brand-icon { width: 34px; height: 34px; } }
