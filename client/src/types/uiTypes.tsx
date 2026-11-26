@@ -1,8 +1,5 @@
-export interface IButtonProps {
-    children: React.ReactNode,
-    onClick?: () => void,
-    type?: 'submit' | 'reset' | 'button',
-    className: string
+export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    children: React.ReactNode;
 }
 
 export interface IDashboardHeader {

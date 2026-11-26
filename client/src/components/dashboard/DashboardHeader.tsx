@@ -5,13 +5,13 @@ const DashboardHeader = ({ tHeader1, tHeader2, tHeader3, tHeader4, tHeader5, tHe
     return (
         <thead>
             <tr>
-                <th>{tHeader1}</th>
-                <th>{tHeader2}</th>
-                <th>{tHeader3}</th>
-                <th>{tHeader4}</th>
-                <th>{tHeader5}</th>
-                <th>{tHeader6}</th>
-                <th>Actions</th>
+                <th scope="col">{tHeader1}</th>
+                <th scope="col">{tHeader2}</th>
+                <th scope="col">{tHeader3}</th>
+                <th scope="col">{tHeader4}</th>
+                <th scope="col">{tHeader5}</th>
+                <th scope="col">{tHeader6}</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
     );
