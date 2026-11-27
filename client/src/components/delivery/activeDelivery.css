@@ -1,9 +1,89 @@
 .activeDelivery-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: min(76rem, calc(100% - 2rem));
+    min-width: 0;
+    margin-inline: auto;
+    padding-block: 2.5rem 4rem;
+    color: var(--title-color, #28221f);
+    container-type: inline-size;
+}
+
+.delivery-page-heading h1 {
+    margin-block: 0.35rem 0.65rem;
+    font-size: clamp(1.85rem, 1.35rem + 2vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+.delivery-page-heading > p:last-child {
+    margin: 0;
+    color: var(--text-color, #65584e);
+    line-height: 1.6;
+}
+
+.activeDelivery-container .delivery-eyebrow {
+    margin: 0;
+    color: var(--first-color, #c83d2d);
+    font-size: 0.75rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.activeDelivery-container .activeOrders {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
     width: 100%;
-    gap: 1.2rem;
-    padding: 2rem 0;
+    min-width: 0;
+    gap: 1.25rem;
+}
+
+.delivery-page-state {
+    padding: 2rem 1.25rem;
+    border: 1px solid var(--border-color, #eadfd2);
+    border-radius: var(--radius, 1rem);
+    background: var(--white-color, #fff);
+    color: var(--text-color, #65584e);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.delivery-page-state .loadingIcon {
+    width: 1.5rem;
+    margin: 0.5rem;
+}
+
+.delivery-page-state .noInfo-container {
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+}
+
+.delivery-page-state .error-Container {
+    width: min(100%, 30rem);
+    margin-inline: auto;
+    border: 1px solid #e9b9b1;
+    border-radius: 0.8rem;
+    box-shadow: none;
+}
+
+.activeDelivery-container button:focus-visible {
+    outline: 3px solid var(--first-color, #c83d2d);
+    outline-offset: 3px;
+}
+
+@container (max-width: 60rem) {
+    .activeDelivery-container .activeOrders {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .activeDelivery-container .loadingIcon {
+        animation: none;
+    }
 }

@@ -1,117 +1,224 @@
 .liveOrders-container {
-    margin-top: 100px;
-    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: min(76rem, calc(100% - 2rem));
+    min-width: 0;
+    margin-inline: auto;
+    padding-block: 2.5rem 4rem;
+    color: var(--title-color, #28221f);
+    container-type: inline-size;
+}
+
+.liveOrders-container .usersHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+}
+
+.liveOrders-container .header-title {
+    margin-block: 0.35rem 0.65rem;
+    color: var(--title-color, #28221f);
+    font-size: clamp(1.85rem, 1.35rem + 2vw, 2.8rem);
+    font-weight: 750;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+
+.liveOrders-container .liveOrders-eyebrow {
+    margin: 0;
+    color: var(--first-color, #c83d2d);
+    font-size: 0.75rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.liveOrders-container .usersHeader > div > p:last-child {
+    margin: 0;
+    color: var(--text-color, #65584e);
+    line-height: 1.6;
+}
+
+.liveOrders-container .header-btn,
+.liveOrders-container .liveOrders-deliver,
+.liveOrders-container .liveOrders-retry {
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.65rem;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.liveOrders-container .header-btn {
+    border-color: var(--border-color, #eadfd2);
+    background: var(--white-color, #fff);
+    color: var(--first-color, #c83d2d);
+    white-space: nowrap;
+}
+
+.liveOrders-container .header-btn:hover {
+    background: #fff1ee;
+}
+
+.liveOrders-container .table-wrapper {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    border: 1px solid var(--border-color, #eadfd2);
+    border-radius: var(--radius, 1rem);
+    background: var(--white-color, #fff);
+    box-shadow: var(--shadow, 0 8px 24px #28221f08);
 }
 
 .liveOrders {
     width: 100%;
+    min-width: 47rem;
     border-collapse: collapse;
-    background-color: var(--white-color);
+    color: var(--title-color, #28221f);
+    font-size: 0.875rem;
+    line-height: 1.5;
 }
 
+.liveOrders caption {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    color: var(--text-color, #65584e);
+    font-size: 0.8rem;
+}
 
 .liveOrders th,
 .liveOrders td {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--border-color, #eadfd2);
+    text-align: left;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+}
+
+.liveOrders thead th {
+    background: var(--body-color, #fff8ed);
+    color: var(--title-color, #28221f);
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.liveOrders tbody th {
+    font-weight: 650;
+}
+
+.liveOrders tbody tr:last-child > * {
+    border-bottom: 0;
+}
+
+.liveOrders .liveOrder-row:hover {
+    background: #fffaf3;
+}
+
+.liveOrders-container .liveOrders-status {
+    display: inline-block;
+    padding: 0.25rem 0.55rem;
+    border: 1px solid #e7d3a7;
+    border-radius: 0.45rem;
+    background: #fff2d4;
+    color: var(--title-color, #28221f);
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.025em;
+}
+
+.liveOrders-container .liveOrders-deliver {
+    background: var(--first-color, #c83d2d);
+    color: var(--white-color, #fff);
+    white-space: nowrap;
+}
+
+.liveOrders-container .liveOrders-deliver:hover:not(:disabled) {
+    background: #a52e22;
+}
+
+.liveOrders .liveOrders-state {
+    padding: 2.5rem 1.5rem;
     text-align: center;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
+    color: var(--text-color, #65584e);
 }
 
-
-.liveOrders th {
-    background-color: var(--border-color);
-    color: var(--title-color);
-    font: var(--h4);
+.liveOrders-state .loadingIcon {
+    width: 1.5rem;
+    margin: 0.5rem;
 }
 
-.liveOrder-row:nth-child(even) {
-    background-color: var(--container-color);
+.liveOrders-state .error-Container {
+    width: min(100%, 30rem);
+    margin-inline: auto;
+    border: 1px solid #e9b9b1;
+    border-radius: 0.8rem;
+    box-shadow: none;
 }
 
-.liveOrder-row:hover {
-    background-color: var(--container-color);
-}
-
-
-.liveOrders td {
-    padding: 1rem 0.7rem;
-    text-align: center;
-    line-height: 12px;
-}
-
-.liveOrders button {
-    padding: 0.4rem 0.9rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: 0.3s;
-    background-color: var(--first-color);
-    color: var(--white-color);
-}
-
-.liveOrders button:hover {
-    background-color: var(--first-color-hover);
-}
-
-
-.table-wrapper {
-    width: 80%;
-    overflow-x: auto;
-    background-color: var(--white-color);
-    border-radius: 0 0 12px 12px;
-    box-shadow: var(--boxShadow);
-}
-
-.usersHeader {
+.liveOrders-notice {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    padding: 1.5rem 2rem;
-    background-color: var(--first-color);
-    border-radius: 12px 12px 0 0;
-    box-shadow: var(--boxShadow);
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1rem;
+    border: 1px solid #e9b9b1;
+    border-radius: 0.75rem;
+    background: #fff1ee;
+    color: #963023;
+    line-height: 1.5;
 }
 
-.header-title {
-    color: var(--white-color);
-    font: var(--h3);
+.liveOrders-notice p {
+    flex: 1 1 18rem;
+    margin: 0;
 }
 
-
-.tableBtns {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+.liveOrders-container .liveOrders-retry {
+    border-color: #e9b9b1;
+    background: var(--white-color, #fff);
+    color: #963023;
 }
 
-.header-btn {
-    padding: 0.5rem 1rem;
-    background-color: var(--border-color);
-    border-radius: 5px;
-    color: var(--first-color-hover);
+.liveOrders-container button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
 }
 
+.liveOrders-container :where(button, .table-wrapper):focus-visible {
+    outline: 3px solid var(--first-color, #c83d2d);
+    outline-offset: 3px;
+}
 
+.liveOrders-container .table-wrapper:focus-visible {
+    outline-offset: -3px;
+}
 
-
-@media screen and (max-width: 768px) {
-
-    .usersHeader,
-    .table-wrapper {
-        width: 90%;
+@container (max-width: 38rem) {
+    .liveOrders-container .usersHeader {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
-    .liveOrders td {
-        padding: 0.5rem;
-        font-size: 0.9rem;
+    .liveOrders-container .header-btn {
+        width: 100%;
     }
+}
 
-    .liveOrders th {
-        font: var(--h5);
+@media (prefers-reduced-motion: reduce) {
+    .liveOrders-container .loadingIcon {
+        animation: none;
     }
 }
